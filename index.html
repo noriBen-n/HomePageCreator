@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="大阪の娯楽施設70件を、年齢層・予算・市区町村・エリアで絞り込める非公式ガイド。モデルコースやお気に入り保存、日英バイリンガル表示にも対応。">
+<title>大阪娯楽ガイド</title>
+<style>
+  :root{
+    --bg:#f4f5fa;
+    --surface:#ffffff;
+    --surface2:#eef0f8;
+    --text:#1a1d2b;
+    --text-dim:#5b6178;
+    --accent:#ff8a3d;
+    --accent2:#ef4a5a;
+    --accent2-text:#c23349;
+    --accent-text:#ac5d29;
+    --line:#e3e5f0;
+    --shadow: 0 1px 2px rgba(20,22,40,.04), 0 8px 24px rgba(20,22,40,.06);
+    --shadow-hover: 0 4px 10px rgba(20,22,40,.07), 0 16px 32px rgba(20,22,40,.1);
+
+    --c-park:#e08a2e;
+    --c-aqua:#1f9aa3;
+    --c-view:#4f6fc2;
+    --c-castle:#a8792f;
+    --c-shop:#d64a5c;
+    --c-onsen:#c46b91;
+    --c-museum:#7a63c4;
+    --c-arcade:#22a37a;
+    --c-nature:#4f9e5c;
+    --tag-green-text:#1f7a52;
+
+    /* darkened, WCAG-AA-safe variants for when a category color sits behind small text on a light surface */
+    --c-park-text:#a16321;
+    --c-aqua-text:#197d84;
+    --c-view-text:#4f6fc2;
+    --c-castle-text:#936a29;
+    --c-shop-text:#c54455;
+    --c-onsen-text:#a55a7a;
+    --c-museum-text:#7a63c4;
+    --c-arcade-text:#1a8060;
+    --c-nature-text:#3f7f4a;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0e1220;
+      --surface:#161b2c;
+      --surface2:#1d2338;
+      --text:#eef0f8;
+      --text-dim:#8d93ad;
+      --accent:#ffb066;
+      --accent-text:#ffb066;
+      --accent2:#ff6b76;
+      --accent2-text:#ff6b76;
+      --line:rgba(255,255,255,.09);
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 30px rgba(0,0,0,.35);
+      --shadow-hover: 0 4px 12px rgba(0,0,0,.35), 0 18px 40px rgba(0,0,0,.4);
+
+      --c-park:#f0a24a;
+      --c-aqua:#3cc3cc;
+      --c-view:#7b96e8;
+      --c-castle:#cfa25c;
+      --c-shop:#ff6f80;
+      --c-onsen:#e08fb0;
+      --c-museum:#a693ea;
+      --c-arcade:#3fd6a3;
+      --c-nature:#6fc47e;
+      --tag-green-text:#6fc47e;
+
+      --c-park-text:#f0a24a;
+      --c-aqua-text:#3cc3cc;
+      --c-view-text:#7b96e8;
+      --c-castle-text:#cfa25c;
+      --c-shop-text:#ff6f80;
+      --c-onsen-text:#e08fb0;
+      --c-museum-text:#a693ea;
+      --c-arcade-text:#3fd6a3;
+      --c-nature-text:#6fc47e;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0e1220;
+    --surface:#161b2c;
+    --surface2:#1d2338;
+    --text:#eef0f8;
+    --text-dim:#8d93ad;
+    --accent:#ffb066;
+    --accent-text:#ffb066;
+    --accent2:#ff6b76;
+    --accent2-text:#ff6b76;
+    --line:rgba(255,255,255,.09);
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 30px rgba(0,0,0,.35);
+    --shadow-hover: 0 4px 12px rgba(0,0,0,.35), 0 18px 40px rgba(0,0,0,.4);
+
+    --c-park:#f0a24a;
+    --c-aqua:#3cc3cc;
+    --c-view:#7b96e8;
+    --c-castle:#cfa25c;
+    --c-shop:#ff6f80;
+    --c-onsen:#e08fb0;
+    --c-museum:#a693ea;
+    --c-arcade:#3fd6a3;
+    --c-nature:#6fc47e;
+    --tag-green-text:#6fc47e;
+
+    --c-park-text:#f0a24a;
+    --c-aqua-text:#3cc3cc;
+    --c-view-text:#7b96e8;
+    --c-castle-text:#cfa25c;
+    --c-shop-text:#ff6f80;
+    --c-onsen-text:#e08fb0;
+    --c-museum-text:#a693ea;
+    --c-arcade-text:#3fd6a3;
+    --c-nature-text:#6fc47e;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic Medium","Meiryo",sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .serif{
+    font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+  }
+
+  a{color:inherit;}
+
+  /* ---- one strong, consistent keyboard-focus ring for every interactive element on the page ---- */
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, [tabindex]:focus-visible{
+    outline:2px solid var(--accent2-text);
+    outline-offset:2px;
+    border-radius:4px;
+  }
+
+  /* ---------- Header / Hero ---------- */
+  .hero-outer{
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+  }
+  .hero-bg svg{width:100%;height:100%;display:block;}
+  .hero{
+    position:relative;
+    z-index:1;
+    padding:56px 24px 40px;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .hero-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .eyebrow{
+    font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+    font-size:13px;
+    letter-spacing:.28em;
+    color:var(--accent2-text);
+    font-weight:600;
+    margin:0 0 14px;
+  }
+  h1.title{
+    font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+    font-weight:600;
+    font-size:clamp(32px,5vw,52px);
+    margin:0 0 14px;
+    text-wrap:balance;
+    letter-spacing:.02em;
+  }
+  .hero p.lead{
+    max-width:640px;
+    color:var(--text-dim);
+    font-size:16px;
+    margin:0 0 24px;
+    text-wrap:pretty;
+  }
+  .stats{
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+  }
+  .stat b{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:26px;
+    font-variant-numeric:tabular-nums;
+    display:block;
+    color:var(--text);
+  }
+  .stat span{
+    font-size:12px;
+    color:var(--text-dim);
+    letter-spacing:.05em;
+  }
+
+  .explore-block{margin-top:36px;}
+  .explore-label{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:13px;
+    color:var(--text-dim);
+    margin:0 0 12px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .explore-label::before{
+    content:"";
+    width:16px;height:1px;
+    background:var(--accent2);
+  }
+  .explore-scroll{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding-bottom:4px;
+    scrollbar-width:thin;
+  }
+  .explore-tile{
+    flex:0 0 auto;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 16px;
+    border-radius:999px;
+    border:1px solid var(--tile-color,var(--line));
+    background:color-mix(in srgb, var(--tile-color,var(--accent)) 10%, var(--surface));
+    color:var(--text);
+    font-size:12.5px;
+    font-weight:600;
+    white-space:nowrap;
+    cursor:pointer;
+    font-family:inherit;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .explore-tile:hover{transform:translateY(-2px); box-shadow:var(--shadow);}
+  .explore-tile .dot{
+    width:9px;height:9px;
+    border-radius:50%;
+    background:var(--tile-color,var(--accent));
+    flex:none;
+  }
+
+  .wave-divider{max-width:1180px;margin:0 auto;padding:0 24px;line-height:0;}
+  .wave-divider svg{width:100%;height:20px;display:block;}
+
+  /* ---------- Model courses ---------- */
+  .courses-wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 0 36px;
+  }
+  .courses-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:12px;
+    padding:0 24px;
+    margin:0 0 16px;
+  }
+  .courses-heading{
+    margin:0 0 4px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:20px;
+    font-weight:600;
+  }
+  .courses-sub{
+    margin:0;
+    font-size:13px;
+    color:var(--text-dim);
+  }
+  .courses-count{
+    font-size:11px;
+    color:var(--text-dim);
+    white-space:nowrap;
+    padding-bottom:3px;
+  }
+  .courses-count b{color:var(--text);font-variant-numeric:tabular-nums;}
+  .courses-scroll-wrap{position:relative;}
+  .courses-scroll{
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    scroll-snap-type:x proximity;
+    padding:2px 24px 14px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    -webkit-mask-image:linear-gradient(to right, black calc(100% - 48px), transparent 100%);
+    mask-image:linear-gradient(to right, black calc(100% - 48px), transparent 100%);
+  }
+  .courses-scroll.at-end{-webkit-mask-image:none; mask-image:none;}
+  .courses-scroll::-webkit-scrollbar{height:6px;}
+  .courses-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:999px;}
+  .scroll-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:2;
+    width:34px;height:34px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--surface);
+    color:var(--text);
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity .15s ease;
+  }
+  .scroll-arrow:hover{border-color:var(--accent);color:var(--accent);}
+  .scroll-arrow.prev{left:6px;}
+  .scroll-arrow.next{right:6px;}
+  .scroll-arrow[disabled]{opacity:0;pointer-events:none;}
+  .scroll-arrow svg{width:16px;height:16px;}
+  @media (max-width:640px){ .scroll-arrow{display:none;} }
+  .course-card{
+    scroll-snap-align:start;
+    flex:0 0 272px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .course-card:hover{
+    border-color:var(--accent);
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-hover);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .course-card{transition:none;}
+    .course-card:hover{transform:none;}
+  }
+  .course-top-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:8px;
+  }
+  .course-area-tag{
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.04em;
+    color:var(--accent-text);
+    background:color-mix(in srgb, var(--accent) 16%, transparent);
+    border-radius:999px;
+    padding:3px 10px;
+    white-space:nowrap;
+  }
+  .course-title{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:15px;
+    font-weight:600;
+    margin:0;
+  }
+  .course-summary{
+    font-size:13px;
+    color:var(--text-dim);
+    margin:0;
+  }
+  .course-meta{
+    font-size:11.5px;
+    color:var(--accent2-text);
+    letter-spacing:.03em;
+    font-weight:600;
+  }
+  .course-family-tag{
+    align-self:flex-start;
+    font-size:11px;
+    font-weight:600;
+    color:var(--tag-green-text);
+    background:color-mix(in srgb, var(--c-arcade) 14%, transparent);
+    border-radius:999px;
+    padding:3px 10px;
+  }
+  .course-open-btn{
+    align-self:flex-start;
+    margin-top:2px;
+    background:none;
+    border:0;
+    padding:0;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--accent2-text);
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .course-open-btn:hover{text-decoration:underline;}
+  .course-venues{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:2px;
+  }
+  .course-venue-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-size:11.5px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:4px 10px 4px 4px;
+    background:var(--surface2);
+    cursor:pointer;
+    color:var(--text);
+    font-family:inherit;
+  }
+  .course-venue-pill .num{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:16px;height:16px;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    font-size:9.5px;
+    font-weight:700;
+    flex:none;
+  }
+  .course-venue-pill:hover{border-color:var(--accent);color:var(--accent);}
+
+  /* ---------- Filter bar ---------- */
+  .filterbar{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .filterbar-inner{
+    max-width:1180px;
+    margin:0 auto;
+    padding:14px 24px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .search-row{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .search-box{
+    flex:1;
+    min-width:180px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:9px 14px;
+  }
+  .search-box svg{flex:none;opacity:.55;}
+  .search-box input{
+    border:0;
+    outline:0;
+    background:transparent;
+    color:var(--text);
+    font-size:14px;
+    width:100%;
+    font-family:inherit;
+  }
+  .search-box input::placeholder{color:var(--text-dim);}
+
+  select.sort{
+    background:var(--surface);
+    border:1px solid var(--line);
+    color:var(--text);
+    border-radius:10px;
+    padding:9px 12px;
+    font-size:13px;
+    font-family:inherit;
+  }
+
+  .rec-toggle{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:9px 14px;
+    font-size:13px;
+    cursor:pointer;
+    user-select:none;
+    white-space:nowrap;
+    font-family:inherit;
+    color:var(--text);
+  }
+  .rec-toggle .dot{
+    width:9px;height:9px;border-radius:50%;
+    background:var(--line);
+    transition:background .15s;
+  }
+  .rec-toggle.active .dot{background:var(--accent2);}
+  .rec-toggle.active{border-color:var(--accent2);color:var(--accent2);}
+  .filter-toggle{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:9px 14px;
+    font-size:13px;
+    cursor:pointer;
+    user-select:none;
+    white-space:nowrap;
+    font-family:inherit;
+    color:var(--text);
+  }
+  .filter-toggle svg{width:14px;height:14px;transition:transform .18s;}
+  .filter-toggle.open svg{transform:rotate(180deg);}
+  .filter-toggle .badge{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    min-width:17px;
+    height:17px;
+    padding:0 4px;
+    border-radius:999px;
+    background:var(--accent2);
+    color:#fff;
+    font-size:10.5px;
+    font-weight:700;
+    font-variant-numeric:tabular-nums;
+  }
+  .filter-toggle.has-active{border-color:var(--accent2);}
+  .filter-toggle .badge.show{display:flex;}
+
+  .filter-panel{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .22s ease;
+    border-bottom:1px solid transparent;
+  }
+  .filter-panel.open{
+    max-height:900px;
+    border-bottom:1px solid var(--line);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .filter-panel{transition:none;}
+  }
+  .filter-panel-inner{
+    max-width:1180px;
+    margin:0 auto;
+    padding:16px 24px 18px;
+  }
+
+  .view-toggle{
+    display:flex;
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    flex:none;
+  }
+  .view-btn{
+    padding:9px 13px;
+    font-size:12.5px;
+    background:var(--surface);
+    color:var(--text-dim);
+    border:0;
+    cursor:pointer;
+    font-family:inherit;
+    white-space:nowrap;
+  }
+  .view-btn+.view-btn{border-left:1px solid var(--line);}
+  .view-btn.active{background:var(--text);color:var(--bg);}
+  .view-btn:hover:not(.active){color:var(--text);}
+
+  .area-section{margin-bottom:14px;}
+  .area-section-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    width:100%;
+    padding:12px 4px;
+    border:0;
+    border-bottom:1px solid var(--line);
+    background:none;
+    cursor:pointer;
+    font-family:inherit;
+    text-align:left;
+  }
+  .area-section-head h3{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:16px;
+    font-weight:600;
+    margin:0;
+    color:var(--text);
+  }
+  .area-section-count{
+    font-size:12px;
+    color:var(--text-dim);
+    font-variant-numeric:tabular-nums;
+  }
+  .area-section-chevron{
+    margin-left:auto;
+    width:16px;height:16px;
+    color:var(--text-dim);
+    flex:none;
+    transition:transform .18s ease;
+  }
+  .area-section.open .area-section-chevron{transform:rotate(180deg);}
+  .area-section-body{
+    display:grid;
+    grid-template-rows:0fr;
+    transition:grid-template-rows .25s ease;
+  }
+  .area-section.open .area-section-body{grid-template-rows:1fr;}
+  .area-section-body-inner{overflow:hidden;}
+  .area-section-body-inner .grid{padding-top:16px;}
+  @media (prefers-reduced-motion: reduce){
+    .area-section-body{transition:none;}
+    .area-section-chevron{transition:none;}
+  }
+
+  .lang-toggle{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:8px 16px;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.04em;
+    cursor:pointer;
+    color:var(--text);
+    font-family:inherit;
+    white-space:nowrap;
+  }
+  .lang-toggle:hover{border-color:var(--accent);color:var(--accent);}
+
+  .filter-groups{
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px 28px;
+  }
+  .fgroup{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .fgroup .flabel{
+    font-size:11px;
+    letter-spacing:.1em;
+    color:var(--text-dim);
+  }
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .chip{
+    border:1px solid var(--line);
+    background:var(--surface);
+    color:var(--text-dim);
+    border-radius:999px;
+    padding:6px 13px;
+    font-size:13px;
+    cursor:pointer;
+    transition:.12s;
+    font-family:inherit;
+  }
+  .chip:hover{border-color:var(--accent);color:var(--text);}
+  .chip.active{
+    background:var(--text);
+    color:var(--bg);
+    border-color:var(--text);
+  }
+
+  .result-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-size:12.5px;
+    color:var(--text-dim);
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .result-row b{color:var(--text);font-variant-numeric:tabular-nums;}
+  .result-row-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .result-row .view-toggle .view-btn{padding:5px 11px;font-size:11.5px;}
+  .course-banner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    background:color-mix(in srgb, var(--accent) 10%, var(--surface));
+    border:1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
+    border-radius:12px;
+    padding:12px 16px;
+    margin-bottom:16px;
+    font-size:13px;
+  }
+  .course-banner[hidden]{display:none;}
+  .course-banner b{color:var(--text);}
+  .course-banner .clear-link{color:var(--accent2);text-decoration:none;font-weight:600;}
+  .course-banner .clear-link:hover{text-decoration:underline;}
+  .ribbon.route{background:var(--accent2);}
+  .clear-link{
+    background:none;border:0;color:var(--text-dim);text-decoration:underline;
+    cursor:pointer;font-size:12.5px;font-family:inherit;padding:0;
+  }
+  .clear-link:hover{color:var(--accent2);}
+
+  /* ---------- Grid ---------- */
+  .wrap{max-width:1180px;margin:0 auto;padding:20px 24px 80px;}
+  .wrap .result-row{margin-bottom:18px;}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(272px,1fr));
+    gap:20px;
+  }
+  .empty{
+    grid-column:1/-1;
+    text-align:center;
+    padding:70px 20px;
+    color:var(--text-dim);
+  }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    scroll-margin-top:220px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-hover);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .card{transition:none;}
+    .card:hover{transform:none;}
+  }
+  .card.highlight{outline:2px solid var(--accent2);}
+  .card-art{
+    height:150px;
+    position:relative;
+  }
+  .card-art svg{width:100%;height:100%;display:block;}
+  .ribbon{
+    position:absolute;
+    top:10px;left:10px;
+    background:rgba(20,22,30,.55);
+    backdrop-filter:blur(4px);
+    color:#fff;
+    font-size:11px;
+    letter-spacing:.06em;
+    padding:4px 9px;
+    border-radius:999px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+  }
+  .ribbon svg{width:11px;height:11px;}
+  .area-tag{
+    position:absolute;
+    bottom:10px;right:10px;
+    background:rgba(20,22,30,.5);
+    color:#fff;
+    font-size:11px;
+    padding:3px 9px;
+    border-radius:999px;
+  }
+  .fav-btn{
+    position:absolute;
+    top:10px;right:10px;
+    width:30px;height:30px;
+    border-radius:50%;
+    border:0;
+    background:rgba(20,22,30,.55);
+    backdrop-filter:blur(4px);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:background .12s, transform .1s;
+  }
+  .fav-btn svg{width:15px;height:15px;}
+  .fav-btn:hover{background:rgba(20,22,30,.75);}
+  .fav-btn:active{transform:scale(.9);}
+  .fav-btn.active{color:var(--accent2);}
+
+  .card-body{
+    padding:16px 16px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    flex:1;
+  }
+  .card-title-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:8px;
+  }
+  .card-title{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:17px;
+    font-weight:600;
+    margin:0;
+    letter-spacing:.01em;
+  }
+  .cat-label{
+    font-size:11px;
+    font-weight:600;
+    color:var(--accent-text);
+    white-space:nowrap;
+    letter-spacing:.03em;
+  }
+  .desc{
+    font-size:13px;
+    color:var(--text-dim);
+    margin:0;
+    flex:1;
+  }
+  .access-row{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    font-size:12.5px;
+    color:var(--text-dim);
+  }
+  .access-row svg{width:11px;height:11px;flex:none;opacity:.7;}
+  .price-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .price-block{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .price-main{
+    font-size:13.5px;
+    font-weight:600;
+    font-variant-numeric:tabular-nums;
+    letter-spacing:.01em;
+  }
+  .price-tier{
+    color:var(--text-dim);
+    font-weight:400;
+    margin-right:6px;
+  }
+  .price-note{
+    font-size:11.5px;
+    color:var(--text-dim);
+  }
+  .rating{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    color:var(--text-dim);
+    flex:none;
+    padding-top:1px;
+  }
+  .rating svg{width:13px;height:13px;}
+  .rating b{color:var(--text);font-variant-numeric:tabular-nums;font-weight:600;}
+  .tag-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+  }
+  .link-row{
+    display:flex;
+    gap:8px;
+    margin-top:2px;
+  }
+  .link-btn{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    border:1px solid var(--line);
+    border-radius:9px;
+    padding:7px 8px;
+    font-size:12px;
+    color:var(--text);
+    text-decoration:none;
+    transition:border-color .12s, color .12s;
+  }
+  .link-btn svg{width:12px;height:12px;flex:none;opacity:.7;}
+  .link-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .link-btn:hover svg{opacity:1;}
+  .tag{
+    font-size:11px;
+    color:var(--text-dim);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:3px 9px;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    background:var(--surface2);
+    margin-top:8px;
+  }
+  .footer-inner{
+    max-width:1180px;
+    margin:0 auto;
+    padding:44px 24px 28px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1.6fr;
+    gap:28px;
+    margin-bottom:28px;
+  }
+  @media (max-width:760px){
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  .footer-mark{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:17px;
+    font-weight:600;
+    color:var(--text);
+    margin:0 0 8px;
+  }
+  .footer-tagline{
+    font-size:12.5px;
+    color:var(--text-dim);
+    margin:0;
+    max-width:26em;
+  }
+  .footer-col h4{
+    font-size:11px;
+    letter-spacing:.08em;
+    color:var(--text-dim);
+    margin:0 0 12px;
+    font-weight:600;
+  }
+  .footer-links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+  .footer-links button{
+    background:none;border:0;padding:0;
+    font-size:13px;color:var(--text);
+    cursor:pointer;font-family:inherit;
+    text-align:left;
+  }
+  .footer-links button:hover{color:var(--accent);text-decoration:underline;}
+  .footer-note p{
+    font-size:11.5px;
+    color:var(--text-dim);
+    line-height:1.7;
+    margin:0;
+  }
+  .footer-bottom{
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-size:11px;
+    color:var(--text-dim);
+  }
+</style>
+</head>
+<body>
+<div class="hero-outer">
+  <div class="hero-bg" aria-hidden="true">
+    <svg viewBox="0 0 1180 320" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="heroGlow" cx="50%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.22"/>
+          <stop offset="55%" stop-color="var(--accent2)" stop-opacity="0.08"/>
+          <stop offset="100%" stop-color="var(--accent2)" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1180" height="320" fill="url(#heroGlow)"/>
+      <circle cx="990" cy="70" r="46" fill="var(--accent)" opacity="0.16"/>
+
+      <!-- torii gate -->
+      <g opacity="0.09" fill="var(--text)">
+        <rect x="66" y="150" width="10" height="120" rx="2"/>
+        <rect x="150" y="150" width="10" height="120" rx="2"/>
+        <rect x="52" y="140" width="122" height="12" rx="2"/>
+        <rect x="66" y="162" width="94" height="8" rx="2"/>
+      </g>
+
+      <!-- ferris wheel -->
+      <g opacity="0.10" stroke="var(--text)" stroke-width="3" fill="none">
+        <circle cx="270" cy="200" r="52"/>
+        <line x1="270" y1="148" x2="270" y2="252"/>
+        <line x1="218" y1="200" x2="322" y2="200"/>
+        <line x1="233" y1="163" x2="307" y2="237"/>
+        <line x1="233" y1="237" x2="307" y2="163"/>
+      </g>
+      <rect x="260" y="252" width="20" height="18" opacity="0.08" fill="var(--text)"/>
+
+      <!-- castle -->
+      <g opacity="0.11" fill="var(--text)">
+        <rect x="430" y="190" width="130" height="80" rx="2"/>
+        <polygon points="430,190 495,150 560,190"/>
+        <rect x="430" y="172" width="16" height="20"/>
+        <rect x="462" y="172" width="16" height="20"/>
+        <rect x="494" y="172" width="16" height="20"/>
+        <rect x="526" y="172" width="16" height="20"/>
+        <circle cx="495" cy="140" r="5"/>
+      </g>
+
+      <!-- tower (Tsutenkaku-esque) -->
+      <g opacity="0.10" fill="var(--text)">
+        <polygon points="705,270 718,120 732,120 745,270"/>
+        <rect x="698" y="270" width="54" height="10" rx="2"/>
+        <circle cx="725" cy="112" r="9"/>
+        <rect x="712" y="150" width="26" height="14"/>
+      </g>
+
+      <!-- distant skyline bars -->
+      <g opacity="0.06" fill="var(--text)">
+        <rect x="820" y="200" width="26" height="70"/>
+        <rect x="852" y="175" width="20" height="95"/>
+        <rect x="878" y="220" width="16" height="50"/>
+        <rect x="1040" y="190" width="24" height="80"/>
+        <rect x="1070" y="215" width="18" height="55"/>
+      </g>
+
+      <line x1="0" y1="272" x2="1180" y2="272" stroke="var(--line)" stroke-width="2" opacity="0.6"/>
+    </svg>
+  </div>
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <p class="eyebrow" id="txtEyebrow">OSAKA ENTERTAINMENT GUIDE</p>
+        <h1 class="title" id="txtTitle">大阪 娯楽施設ガイド</h1>
+      </div>
+      <button class="lang-toggle" id="langToggle" type="button">EN</button>
+    </div>
+    <p class="lead" id="txtLead">USJ から道頓堀の夜景、下町の温泉まで。年齢層・予算・おすすめ度で絞り込んで、今日行く場所を見つける。</p>
+    <div class="stats">
+      <div class="stat"><b id="statTotal">16</b><span id="txtStatTotal">掲載施設</span></div>
+      <div class="stat"><b>9</b><span id="txtStatCat">カテゴリ</span></div>
+      <div class="stat"><b id="statRec">9</b><span id="txtStatRec">編集部おすすめ</span></div>
+      <div class="stat"><b id="statFav">0</b><span id="txtStatFav">お気に入り登録中</span></div>
+    </div>
+    <div class="explore-block">
+      <p class="explore-label" id="txtExploreLabel">テーマから探す</p>
+      <div class="explore-scroll" id="exploreTiles"></div>
+    </div>
+  </div>
+</div>
+
+<div class="wave-divider" aria-hidden="true">
+  <svg viewBox="0 0 1180 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 12 Q 30 0 60 12 T 120 12 T 180 12 T 240 12 T 300 12 T 360 12 T 420 12 T 480 12 T 540 12 T 600 12 T 660 12 T 720 12 T 780 12 T 840 12 T 900 12 T 960 12 T 1020 12 T 1080 12 T 1140 12 T 1200 12"
+      fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.35"/>
+  </svg>
+</div>
+
+<div class="courses-wrap">
+  <div class="courses-head">
+    <div>
+      <h2 class="courses-heading" id="txtCoursesHeading">モデルコース</h2>
+      <p class="courses-sub" id="txtCoursesSub">エリアが近い施設を組み合わせた定番プラン。施設名をタップすると下の一覧に絞り込みます。</p>
+    </div>
+    <span class="courses-count"><b id="coursesCount">9</b><span id="txtCoursesCount"> コース・横にスワイプ →</span></span>
+  </div>
+  <div class="courses-scroll-wrap">
+    <button class="scroll-arrow prev" id="coursesPrev" type="button" aria-label="前へ" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="courses-scroll" id="coursesGrid"></div>
+    <button class="scroll-arrow next" id="coursesNext" type="button" aria-label="次へ">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="filterbar">
+  <div class="filterbar-inner">
+    <div class="search-row">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="searchInput" type="text" placeholder="施設名やエリアで検索（例: 海遊館 / 難波）" />
+      </div>
+      <button class="rec-toggle" id="recToggle" type="button"><span class="dot"></span><span id="txtRecToggle">おすすめのみ</span></button>
+      <button class="rec-toggle" id="favToggle" type="button"><span class="dot"></span><span id="txtFavToggle">お気に入りのみ</span></button>
+      <select class="sort" id="sortSelect">
+        <option value="rec" id="optRec">並び替え: おすすめ順</option>
+        <option value="rating" id="optRating">評価が高い順</option>
+        <option value="budgetAsc" id="optBudget">予算が低い順</option>
+        <option value="name" id="optName">名前順</option>
+      </select>
+      <button class="filter-toggle" id="filterToggle" type="button" aria-expanded="false">
+        <span id="txtFilterToggle">絞り込み</span>
+        <span class="badge" id="filterBadge">0</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="filter-panel" id="filterPanel">
+  <div class="filter-panel-inner">
+    <div class="filter-groups">
+      <div class="fgroup">
+        <span class="flabel" id="txtLabelWard">市区町村</span>
+        <div class="chips" id="wardChips"></div>
+      </div>
+      <div class="fgroup">
+        <span class="flabel" id="txtLabelAge">年齢層</span>
+        <div class="chips" id="ageChips"></div>
+      </div>
+      <div class="fgroup">
+        <span class="flabel" id="txtLabelBudget">予算の目安</span>
+        <div class="chips" id="budgetChips"></div>
+      </div>
+      <div class="fgroup">
+        <span class="flabel" id="txtLabelCat">カテゴリ</span>
+        <div class="chips" id="catChips"></div>
+      </div>
+      <div class="fgroup">
+        <span class="flabel" id="txtLabelMisc">こだわり</span>
+        <div class="chips" id="miscChips"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <p class="eyebrow" id="txtGridEyebrow">ALL VENUES</p>
+  <h2 class="courses-heading" id="txtGridHeading" style="margin-bottom:16px;">施設一覧</h2>
+  <div class="course-banner" id="courseBanner" hidden>
+    <span id="courseBannerText"></span>
+    <button class="clear-link" id="courseBannerClear" type="button"></button>
+  </div>
+  <div class="result-row">
+    <span class="result-row-left">
+      <b id="resultCount">16</b> <span id="txtResultSuffix">件表示中</span>
+      <div class="view-toggle" role="group">
+        <button class="view-btn active" id="viewListBtn" type="button" data-view="list"><span id="txtViewList">一覧</span></button>
+        <button class="view-btn" id="viewAreaBtn" type="button" data-view="area"><span id="txtViewArea">エリア別</span></button>
+      </div>
+    </span>
+    <span style="display:flex;gap:14px;flex-wrap:wrap;">
+      <button class="clear-link" id="copyBtn" type="button">この条件のリンクをコピー</button>
+      <button class="clear-link" id="clearBtn" type="button">絞り込みをリセット</button>
+    </span>
+  </div>
+  <div id="grid"></div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <p class="footer-mark">大阪娯楽ガイド</p>
+        <p class="footer-tagline" id="txtFooterTagline">年齢層・予算・エリアで探す、非公式の大阪おでかけガイド。</p>
+      </div>
+      <div class="footer-col">
+        <h4 id="txtFooterAreaHeading">エリアから探す</h4>
+        <ul class="footer-links" id="footerRegions"></ul>
+      </div>
+      <div class="footer-col">
+        <h4 id="txtFooterCatHeading">カテゴリから探す</h4>
+        <ul class="footer-links" id="footerCats"></ul>
+      </div>
+      <div class="footer-col footer-note">
+        <h4 id="txtFooterAboutHeading">このサイトについて</h4>
+        <p id="footerText">料金は2026年8月時点の調査に基づく目安です。変動制の施設や改定直後の施設もあるため、最新の金額は各カードの「公式サイト」リンクから必ずご確認ください。イラストは施設の雰囲気を伝えるオリジナル制作物です。実際の写真は「公式サイト」「経路を調べる」リンク先でご覧いただけます。</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span id="txtFooterDisclaimer">大阪の観光公式機関とは無関係の、個人制作による非公式ファンガイドです。</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/json" id="venuesData">[{"id":1,"cat":"park","wardKey":"konohana","age":["kids","family","teens","couple"],"budget":3,"rating":4.7,"rec":true,"aliases":["USJ","ユニバ","ユニバーサル"],"closedDay":"無休","closedDayEn":"No fixed closures","name":"ユニバーサル・スタジオ・ジャパン","nameEn":"Universal Studios Japan","area":"此花区","areaEn":"Konohana Ward","price":"1デイ・スタジオ・パス 大人 8,200円〜","priceEn":"1-Day Studio Pass, adult from ¥8,200","priceNote":"日付により変動する価格変動制","priceNoteEn":"Dynamic pricing — varies by date","duration":"1日","durationEn":"a full day","rainOk":false,"station":"JRゆめ咲線 ユニバーサルシティ駅","stationEn":"Universal City Sta. (JR Yumesaki Line)","walk":"徒歩4分","walkEn":"4-min walk","official":"https://www.usj.co.jp/","desc":"世界的映画・アニメの世界を体感できる関西屈指のテーマパーク。絶叫からキッズエリアまで幅広く楽しめる。","descEn":"Kansai's largest movie & anime theme park, with everything from thrill rides to a dedicated kids' area."},{"id":2,"cat":"castle","wardKey":"chuo","age":["family","adult","teens"],"budget":1,"rating":4.5,"rec":true,"closedDay":"無休","closedDayEn":"No fixed closures","name":"大阪城公園（天守閣）","nameEn":"Osaka Castle Park (Main Tower)","area":"中央区","areaEn":"Chuo Ward","price":"天守閣入館 大人 600円","priceEn":"Tower admission, adult ¥600","priceNote":"公園自体の散策は無料","priceNoteEn":"The park itself is free to walk","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":false,"station":"JR/地下鉄 森ノ宮駅・大阪ビジネスパーク駅","stationEn":"Morinomiya / Osaka Business Park Sta.","walk":"徒歩10〜15分","walkEn":"10–15 min walk","official":"https://www.osakacastle.net/","desc":"豊臣秀吉ゆかりの名城。天守閣からの眺望と広大な公園は季節を問わず散策向き。","descEn":"The iconic castle built by Toyotomi Hideyoshi. Great tower views and a huge park for a stroll in any season."},{"id":3,"cat":"aqua","wardKey":"minato","age":["kids","family","couple"],"budget":2,"rating":4.6,"rec":true,"closedDay":"無休（法定点検日を除く）","closedDayEn":"No fixed closures (except scheduled maintenance)","name":"海遊館","nameEn":"Osaka Aquarium Kaiyukan","area":"港区","areaEn":"Minato Ward","price":"大人 2,700〜3,500円","priceEn":"Adult ¥2,700–3,500","priceNote":"来館日により変わる価格変動制","priceNoteEn":"Dynamic pricing — varies by visit date","duration":"2〜3時間","durationEn":"2–3 hours","rainOk":true,"station":"地下鉄中央線 大阪港駅","stationEn":"Osakako Sta. (Chuo Line)","walk":"徒歩5分","walkEn":"5-min walk","official":"https://www.kaiyukan.com/","desc":"ジンベエザメが泳ぐ巨大水槽で有名な世界最大級の水族館。天保山エリアの定番スポット。","descEn":"One of the world's largest aquariums, famous for its whale shark tank. The heart of the Tempozan waterfront."},{"id":4,"cat":"view","wardKey":"kita","age":["couple","adult","family"],"budget":2,"rating":4.3,"rec":true,"closedDay":"無休","closedDayEn":"No fixed closures","name":"梅田スカイビル 空中庭園展望台","nameEn":"Umeda Sky Building Floating Garden Observatory","area":"北区","areaEn":"Kita Ward","price":"大人 2,000円","priceEn":"Adult ¥2,000","priceNote":"","priceNoteEn":"","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"JR大阪駅・地下鉄梅田駅","stationEn":"Osaka / Umeda Sta.","walk":"徒歩7分","walkEn":"7-min walk","official":"https://www.skybldg.co.jp/","desc":"2棟のビルを繋ぐ独特な建築の屋上展望台。360度の大阪の夜景が広がる。","descEn":"Two towers linked by a striking rooftop observation deck, with a 360° night view of Osaka."},{"id":5,"cat":"shop","wardKey":"chuo","age":["kids","family","teens","couple","adult"],"budget":1,"rating":4.6,"rec":true,"closedDay":"無休","closedDayEn":"No fixed closures","name":"道頓堀・グリコサイン周辺","nameEn":"Dotonbori & the Glico Sign","area":"中央区（難波）","areaEn":"Chuo Ward (Namba)","price":"散策は無料","priceEn":"Free to walk around","priceNote":"飲食・体験は別途","priceNoteEn":"Food and activities cost extra","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":false,"station":"地下鉄御堂筋線 なんば駅","stationEn":"Namba Sta. (Midosuji Line)","walk":"徒歩3分","walkEn":"3-min walk","official":"https://osaka-info.jp/spot/dotonbori/","desc":"巨大看板とネオンが並ぶ大阪の顔。食べ歩きとフォトスポットを兼ねた定番の街歩きコース。","descEn":"Osaka's iconic strip of giant signs and neon — a must for street food and photos."},{"id":6,"cat":"view","wardKey":"abeno","age":["family","couple","adult"],"budget":2,"rating":4.4,"rec":true,"aliases":["ハルカス","あべのハルカス","ハルカス300"],"closedDay":"無休","closedDayEn":"No fixed closures","name":"あべのハルカス300 展望台","nameEn":"Harukas 300 Observatory","area":"阿倍野区","areaEn":"Abeno Ward","price":"大人 2,200円","priceEn":"Adult ¥2,200","priceNote":"2026年7月23日改定後の当日券価格","priceNoteEn":"Same-day price after the July 23, 2026 revision","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"近鉄・JR・地下鉄 天王寺駅／大阪阿部野橋駅","stationEn":"Tennoji / Osaka-Abenobashi Sta.","walk":"徒歩直結","walkEn":"Directly connected","official":"https://www.abenoharukas-300.jp/observatory/","desc":"日本有数の超高層ビル最上部の展望台。天気が良ければ淡路島まで見渡せる。","descEn":"The observatory atop one of Japan's tallest buildings. On a clear day you can see as far as Awaji Island."},{"id":7,"cat":"shop","wardKey":"chuo","age":["teens","couple","adult"],"budget":3,"rating":4.4,"rec":true,"closedDay":"無休","closedDayEn":"No fixed closures","name":"なんばグランド花月","nameEn":"Namba Grand Kagetsu","area":"中央区（難波）","areaEn":"Chuo Ward (Namba)","price":"1階席 5,000円 / 2階席 4,500円","priceEn":"1st floor ¥5,000 / 2nd floor ¥4,500","priceNote":"公演内容により変動","priceNoteEn":"Varies by show","duration":"約3時間（公演）","durationEn":"about 3 hours (show)","rainOk":true,"station":"地下鉄 なんば駅","stationEn":"Namba Sta.","walk":"徒歩5分","walkEn":"5-min walk","official":"https://ngk.yoshimoto.co.jp/","desc":"吉本新喜劇と漫才を生で楽しめる大阪ならではの劇場。笑いに触れたい旅行者に人気。","descEn":"Live manzai and Yoshimoto Shinkigeki comedy — a distinctly Osaka theater experience."},{"id":8,"cat":"museum","wardKey":"ikeda","age":["kids","family"],"budget":1,"rating":4.3,"rec":false,"closedDay":"火曜日（祝日の場合は翌日）","closedDayEn":"Tuesdays (next day if a holiday)","name":"カップヌードルミュージアム 大阪池田","nameEn":"Cupnoodles Museum Osaka Ikeda","area":"池田市","areaEn":"Ikeda City","price":"入館無料（体験は1食500円〜）","priceEn":"Free admission (experiences from ¥500)","priceNote":"チキンラーメンファクトリーは大人1,000円・要予約","priceNoteEn":"Chicken Ramen Factory: adult ¥1,000, reservation required","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"阪急宝塚線 池田駅","stationEn":"Ikeda Sta. (Hankyu Takarazuka Line)","walk":"徒歩20分（バスあり）","walkEn":"20-min walk (bus available)","official":"https://www.cupnoodles-museum.jp/jp/osaka_ikeda/","desc":"世界で一つのオリジナルカップヌードルが作れる体験型ミュージアム。家族連れに好評。","descEn":"A hands-on museum where you design your own one-of-a-kind Cup Noodles. A hit with families."},{"id":9,"cat":"arcade","wardKey":"various","age":["teens","family"],"budget":2,"rating":4,"rec":false,"aliases":["ラウワン"],"closedDay":"無休","closedDayEn":"No fixed closures","name":"ラウンドワン スタジアム","nameEn":"Round1 Stadium","area":"各所（複数店舗）","areaEn":"Multiple locations","price":"目安 1,500円〜（店舗・時間帯で変動）","priceEn":"From around ¥1,500 (varies by branch/time)","priceNote":"ボウリング・カラオケ・スポッチャは店舗ごとに料金表あり","priceNoteEn":"Bowling, karaoke, and Sports Cha! each have their own price sheet per branch","duration":"2時間〜","durationEn":"2+ hours","rainOk":true,"station":"店舗により異なる","stationEn":"Varies by branch","walk":"-","walkEn":"-","official":"https://www.round1.co.jp/","desc":"ボウリング・カラオケ・ゲームが一体化した屋内エンタメ施設。雨の日の予定にも便利。","descEn":"Bowling, karaoke, and arcade games under one roof — a reliable rainy-day plan."},{"id":10,"cat":"onsen","wardKey":"naniwa","age":["adult","couple","family"],"budget":2,"rating":4.1,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"スパワールド 世界の大温泉","nameEn":"Spa World","area":"浪速区","areaEn":"Naniwa Ward","price":"大人 1,500円","priceEn":"Adult ¥1,500","priceNote":"岩盤浴は別途+800〜1,000円","priceNoteEn":"Rock-bath sauna is an extra ¥800–1,000","duration":"2時間〜","durationEn":"2+ hours","rainOk":true,"station":"地下鉄 動物園前駅・新今宮駅","stationEn":"Dobutsuen-mae / Shin-Imamiya Sta.","walk":"徒歩2分","walkEn":"2-min walk","official":"https://www.spaworld.co.jp/","desc":"世界各国をテーマにしたお風呂を巡れる温泉施設。プールやサウナも併設。","descEn":"Baths themed after countries around the world, plus pools and saunas."},{"id":11,"cat":"park","wardKey":"hirakata","age":["kids","family"],"budget":2,"rating":3.9,"rec":false,"closedDay":"不定休","closedDayEn":"Irregular closures","name":"ひらかたパーク","nameEn":"Hirakata Park","area":"枚方市","areaEn":"Hirakata City","price":"入園料 大人 2,000円","priceEn":"Admission, adult ¥2,000","priceNote":"アトラクションは別途フリーパスあり","priceNoteEn":"Ride pass sold separately","duration":"半日","durationEn":"half a day","rainOk":false,"station":"京阪本線 枚方公園駅","stationEn":"Hirakata-koen Sta. (Keihan Line)","walk":"徒歩3分","walkEn":"3-min walk","official":"https://www.hirakatapark.co.jp/","desc":"地元で長年愛される遊園地。小さな子ども向けアトラクションが充実し落ち着いて遊べる。","descEn":"A long-loved local amusement park with plenty of rides for younger kids, in a relaxed setting."},{"id":12,"cat":"view","wardKey":"minato","age":["family","couple"],"budget":1,"rating":4,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"天保山大観覧車","nameEn":"Tempozan Ferris Wheel","area":"港区","areaEn":"Minato Ward","price":"900〜1,000円","priceEn":"¥900–1,000","priceNote":"3歳以上が有料","priceNoteEn":"Paid for ages 3+","duration":"15分","durationEn":"15 minutes","rainOk":false,"station":"地下鉄中央線 大阪港駅","stationEn":"Osakako Sta.","walk":"徒歩5分","walkEn":"5-min walk","official":"http://www.senyo.co.jp/tempozan/index.html","desc":"海遊館のすぐ隣にある観覧車。大阪湾とベイエリアを一望できる。","descEn":"Right next to Kaiyukan, with sweeping views over Osaka Bay."},{"id":13,"cat":"aqua","wardKey":"suita","age":["kids","family","couple"],"budget":2,"rating":4.2,"rec":true,"closedDay":"無休","closedDayEn":"No fixed closures","name":"ニフレル","nameEn":"NIFREL","area":"吹田市（万博公園）","areaEn":"Suita City (Expo Park)","price":"大人 2,400円","priceEn":"Adult ¥2,400","priceNote":"","priceNoteEn":"","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"大阪モノレール 万博記念公園駅","stationEn":"Bampaku-kinen-koen Sta. (Osaka Monorail)","walk":"徒歩7分","walkEn":"7-min walk","official":"https://www.nifrel.jp/","desc":"生き物を「感性」で楽しむ新感覚の展示施設。アートのような空間演出が特徴。","descEn":"A sensory-driven exhibit that lets you experience creatures as art, in a gallery-like space."},{"id":14,"cat":"museum","wardKey":"kita","age":["family","adult"],"budget":1,"rating":4,"rec":false,"closedDay":"火曜日（祝日の場合は開館）","closedDayEn":"Tuesdays (open if a holiday)","name":"大阪くらしの今昔館","nameEn":"Osaka Museum of Housing and Living","area":"北区","areaEn":"Kita Ward","price":"大人 600円","priceEn":"Adult ¥600","priceNote":"大阪市内在住65歳以上・中学生以下は無料","priceNoteEn":"Free for Osaka-City residents 65+ and junior-high age or younger","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"地下鉄谷町線 天神橋筋六丁目駅","stationEn":"Tenjinbashisuji-Rokuchome Sta.","walk":"徒歩直結","walkEn":"Directly connected","official":"https://www.osaka-angenet.jp/konjyakukan/","desc":"江戸〜昭和の大阪の町並みを原寸大で再現。着物レンタルでの街歩き体験も可能。","descEn":"A full-scale recreation of Osaka's Edo-to-Showa era streetscape, with kimono rental for a stroll through the past."},{"id":15,"cat":"view","wardKey":"kita","age":["teens","couple","family"],"budget":1,"rating":3.8,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"HEP FIVE 観覧車","nameEn":"HEP FIVE Ferris Wheel","area":"北区（梅田）","areaEn":"Kita Ward (Umeda)","price":"1,000円","priceEn":"¥1,000","priceNote":"2026年4月改定後の料金","priceNoteEn":"Price after the April 2026 revision","duration":"15分","durationEn":"15 minutes","rainOk":false,"station":"JR大阪駅・阪急梅田駅","stationEn":"Osaka / Hankyu-Umeda Sta.","walk":"徒歩3分","walkEn":"3-min walk","official":"https://www.hepfive.jp/ferriswheel","desc":"真っ赤な観覧車がランドマークの商業施設屋上。ショッピングのついでに立ち寄れる。","descEn":"A bright red Ferris wheel atop a shopping building — pair it easily with shopping."},{"id":16,"cat":"park","wardKey":"minato","age":["kids","family"],"budget":2,"rating":4,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"レゴランド・ディスカバリー・センター大阪","nameEn":"LEGOLAND Discovery Center Osaka","area":"港区","areaEn":"Minato Ward","price":"大人 2,200〜3,300円","priceEn":"Adult ¥2,200–3,300","priceNote":"日時指定制・価格変動あり","priceNoteEn":"Timed entry, dynamic pricing","duration":"2時間","durationEn":"2 hours","rainOk":true,"station":"地下鉄中央線 大阪港駅","stationEn":"Osakako Sta.","walk":"徒歩3分","walkEn":"3-min walk","official":"https://www.legolanddiscoverycenter.com/osaka/","desc":"レゴブロックの世界を満喫できる屋内型アトラクション。小さな子ども連れに人気。","descEn":"An indoor attraction built entirely from LEGO bricks. A favorite with younger children."},{"id":17,"cat":"view","wardKey":"naniwa","age":["family","couple","adult","teens"],"budget":2,"rating":4.3,"rec":true,"aliases":["つうてんかく","ビリケン"],"closedDay":"無休","closedDayEn":"No fixed closures","name":"通天閣","nameEn":"Tsutenkaku Tower","area":"浪速区（新世界）","areaEn":"Naniwa Ward (Shinsekai)","price":"展望台 大人 1,200円","priceEn":"Observatory, adult ¥1,200","priceNote":"屋外展望台とのセットは1,500円","priceNoteEn":"Set with the outdoor deck is ¥1,500","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"大阪メトロ 恵美須町駅・動物園前駅","stationEn":"Ebisucho / Dobutsuen-mae Sta.","walk":"徒歩3分","walkEn":"3-min walk","official":"https://www.tsutenkaku.co.jp/","desc":"新世界のシンボルタワー。ビリケンさんで有名で、展望台からは大阪の下町の眺めが広がる。","descEn":"The symbol of the retro Shinsekai district, famous for its Billiken statue and downtown Osaka views from the top."},{"id":18,"cat":"shop","wardKey":"chuo","age":["kids","family","teens","couple","adult"],"budget":1,"rating":4.3,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"心斎橋筋商店街","nameEn":"Shinsaibashi-suji Shopping Street","area":"中央区","areaEn":"Chuo Ward","price":"散策は無料","priceEn":"Free to walk around","priceNote":"買い物は別途","priceNoteEn":"Shopping costs extra","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"地下鉄御堂筋線/長堀鶴見緑地線 心斎橋駅","stationEn":"Shinsaibashi Sta.","walk":"徒歩1分","walkEn":"1-min walk","official":"https://www.shinsaibashi.or.jp/","desc":"約600mの全天候型アーケードに約180店舗が並ぶ大阪屈指の商店街。雨の日でも快適に買い物できる。","descEn":"About 180 shops along a 600m all-weather arcade — one of Osaka's premier shopping streets, comfortable even on rainy days."},{"id":19,"cat":"shop","wardKey":"chuo","age":["teens","couple","adult","family"],"budget":1,"rating":4.2,"rec":false,"closedDay":"無休（店舗による）","closedDayEn":"No fixed closures (varies by stall)","name":"黒門市場","nameEn":"Kuromon Ichiba Market","area":"中央区（日本橋）","areaEn":"Chuo Ward (Nipponbashi)","price":"見学は無料","priceEn":"Free to browse","priceNote":"食べ歩きは1品300円〜が目安","priceNoteEn":"Street food snacks from around ¥300 each","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"地下鉄 日本橋駅","stationEn":"Nipponbashi Sta.","walk":"徒歩2分","walkEn":"2-min walk","official":"https://kuromon.com/jp/","desc":"「大阪の台所」と呼ばれるアーケード市場。新鮮な海鮮の食べ歩きが人気。","descEn":"Known as “Osaka's kitchen,” this covered market is popular for fresh seafood eaten on the spot."},{"id":20,"cat":"view","wardKey":"suminoe","age":["couple","adult","family"],"budget":2,"rating":4.1,"rec":false,"aliases":["さきしまコスモタワー","コスモタワー"],"closedDay":"月曜日（祝日の場合は翌日）","closedDayEn":"Mondays (next day if a holiday)","name":"さきしまコスモタワー展望台","nameEn":"Sakishima Cosmo Tower Observatory","area":"住之江区","areaEn":"Suminoe Ward","price":"大人 1,200円","priceEn":"Adult ¥1,200","priceNote":"","priceNoteEn":"","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"ニュートラム トレードセンター前駅","stationEn":"Trade Center-mae Sta. (New Tram)","walk":"徒歩1分","walkEn":"1-min walk","official":"https://www.wtc-cosmotower.com/observatory/","desc":"地上252mから大阪湾を一望できる穴場の展望台。夕景・夜景の美しさで知られる。","descEn":"A lesser-known observatory 252m up, famous for a beautiful sunset and night view over Osaka Bay."},{"id":21,"cat":"onsen","wardKey":"minato","age":["adult","couple","family"],"budget":3,"rating":4.2,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"空庭温泉 OSAKA BAY TOWER","nameEn":"Solaniwa Onsen Osaka Bay Tower","area":"港区（弁天町）","areaEn":"Minato Ward (Bentencho)","price":"大人 2,310円〜（曜日により変動）","priceEn":"Adult from ¥2,310 (varies by day of week)","priceNote":"土日祝は3,080円","priceNoteEn":"¥3,080 on weekends & holidays","duration":"2時間〜","durationEn":"2+ hours","rainOk":true,"station":"JR大阪環状線/地下鉄中央線 弁天町駅","stationEn":"Bentencho Sta.","walk":"徒歩1分","walkEn":"1-min walk","official":"https://baytower.jp/omise/solaniwaonsen/","desc":"駅直結の温泉リゾート。大阪の街並みを見渡す絶景露天風呂が魅力。","descEn":"A hot-spring resort right at the station, known for open-air baths with sweeping views of the Osaka skyline."},{"id":22,"cat":"aqua","wardKey":"tennoji","age":["kids","family"],"budget":1,"rating":4.1,"rec":false,"aliases":["てんどう","動物園"],"closedDay":"月曜日（祝日の場合は翌平日）","closedDayEn":"Mondays (next weekday if a holiday)","name":"天王寺動物園","nameEn":"Tennoji Zoo","area":"天王寺区","areaEn":"Tennoji Ward","price":"大人 800円","priceEn":"Adult ¥800","priceNote":"2026年7月の料金改定後","priceNoteEn":"Price after the July 2026 revision","duration":"2〜3時間","durationEn":"2–3 hours","rainOk":false,"station":"地下鉄/JR 天王寺駅・動物園前駅","stationEn":"Tennoji / Dobutsuen-mae Sta.","walk":"徒歩5分","walkEn":"5-min walk","official":"https://www.tennojizoo.jp/","desc":"市街地の中心にありながら約180種の動物に出会える動物園。通天閣とセットで巡りやすい。","descEn":"A city-center zoo with around 180 species — easy to combine with a visit to nearby Tsutenkaku."},{"id":23,"cat":"castle","wardKey":"suita","age":["family","adult","teens","couple"],"budget":2,"rating":4.4,"rec":true,"closedDay":"水曜日","closedDayEn":"Wednesdays","name":"太陽の塔・万博記念公園","nameEn":"Tower of the Sun & Expo '70 Commemorative Park","area":"吹田市（万博公園）","areaEn":"Suita City (Expo Park)","price":"塔内部見学 大人 720円〜（別途公園入園料）","priceEn":"Tower interior, adult from ¥720 (park admission separate)","priceNote":"内部見学は事前予約制","priceNoteEn":"Interior visit requires advance reservation","duration":"2〜3時間","durationEn":"2–3 hours","rainOk":false,"station":"大阪モノレール 万博記念公園駅","stationEn":"Bampaku-kinen-koen Sta. (Osaka Monorail)","walk":"徒歩4分","walkEn":"4-min walk","official":"https://taiyounotou-expo70.jp/","desc":"岡本太郎が手掛けた高さ70mの塔。広大な公園と合わせて、大阪万博の記憶をたどれる。","descEn":"Taro Okamoto's 70m tower at the heart of a vast park — a chance to trace the memory of Expo '70."},{"id":24,"cat":"view","wardKey":"chuo","age":["family","couple","adult"],"budget":2,"rating":4.2,"rec":false,"closedDay":"無休（荒天時運休）","closedDayEn":"No fixed closures (cancelled in bad weather)","name":"大阪水上バス アクアライナー","nameEn":"Osaka River Cruise Aqua-Liner","area":"中央区（大阪城港）","areaEn":"Chuo Ward (Osaka Castle Port)","price":"大人 2,000円","priceEn":"Adult ¥2,000","priceNote":"全席指定・事前予約推奨","priceNoteEn":"Reserved seating; advance booking recommended","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"大阪城港/天満橋 八軒家浜船着場","stationEn":"Osaka Castle Port / Hachikenya-hama (Temmabashi)","walk":"直結","walkEn":"At the pier","official":"https://suijo-bus.osaka/","desc":"大阪城や中之島の水辺の景色を船上から楽しめるクルーズ。水都大阪ならではの移動そのものが観光になる。","descEn":"A cruise past Osaka Castle and Nakanoshima's waterside scenery — sightseeing built into the ride itself."},{"id":25,"cat":"shop","wardKey":"kita","age":["kids","family","teens","couple","adult"],"budget":1,"rating":4.2,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"グランフロント大阪","nameEn":"Grand Front Osaka","area":"北区","areaEn":"Kita Ward","price":"入場無料","priceEn":"Free to enter","priceNote":"買い物・飲食は別途","priceNoteEn":"Shopping and dining cost extra","duration":"2〜3時間","durationEn":"2–3 hours","rainOk":true,"station":"JR大阪駅・阪急梅田駅","stationEn":"Osaka / Hankyu-Umeda Sta.","walk":"直結","walkEn":"Directly connected","official":"https://www.grandfront-osaka.jp/","desc":"大阪駅直結の複合商業施設。ショッピングからナレッジキャピタルまで幅広く楽しめる。","descEn":"A large complex directly connected to Osaka Station, spanning shopping to the Knowledge Capital innovation zone."},{"id":26,"cat":"nature","wardKey":"kita","age":["kids","family","teens","couple","adult"],"budget":1,"rating":4.4,"rec":true,"closedDay":"無休","closedDayEn":"No fixed closures","name":"グラングリーン大阪 うめきた公園","nameEn":"Grand Green Osaka Umekita Park","area":"北区","areaEn":"Kita Ward","price":"入場無料","priceEn":"Free to enter","priceNote":"","priceNoteEn":"","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":false,"station":"JR大阪駅 うめきた地下口","stationEn":"Osaka Sta. (Umekita underground exit)","walk":"徒歩3分","walkEn":"3-min walk","official":"https://umekita.com/","desc":"大阪駅北側に誕生した大規模な都市公園。緑地とショップ・ホテルが一体となった新しい梅田のランドマーク。","descEn":"A large new urban park just north of Osaka Station, blending green space with shops and hotels — Umeda's newest landmark."},{"id":27,"cat":"shop","wardKey":"naniwa","age":["kids","family","teens","couple","adult"],"budget":1,"rating":4.1,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"なんばパークス","nameEn":"Namba Parks","area":"浪速区","areaEn":"Naniwa Ward","price":"入場無料","priceEn":"Free to enter","priceNote":"買い物は別途","priceNoteEn":"Shopping costs extra","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"南海難波駅","stationEn":"Nankai Namba Sta.","walk":"直結","walkEn":"Directly connected","official":"https://nambaparks.com/","desc":"渓谷のような屋上庭園が特徴の商業施設。緑あふれる散策路が都会の中で異彩を放つ。","descEn":"A shopping complex famous for its canyon-like rooftop garden — a green escape in the middle of the city."},{"id":28,"cat":"shop","wardKey":"naniwa","age":["kids","family","teens","couple","adult"],"budget":1,"rating":3.9,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"なんばCITY","nameEn":"Namba City","area":"浪速区","areaEn":"Naniwa Ward","price":"入場無料","priceEn":"Free to enter","priceNote":"買い物は別途","priceNoteEn":"Shopping costs extra","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"南海なんば駅","stationEn":"Nankai Namba Sta.","walk":"直結","walkEn":"Directly connected","official":"https://nambacity.com/","desc":"南海難波駅直結の地下街を中心とした商業施設。なんばパークスと合わせて雨でも歩き回れる。","descEn":"A shopping complex centered on an underground mall directly linked to Nankai Namba Station — walkable with Namba Parks even in the rain."},{"id":29,"cat":"shop","wardKey":"chuo","age":["teens","couple","adult"],"budget":1,"rating":4,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"心斎橋PARCO","nameEn":"Shinsaibashi PARCO","area":"中央区","areaEn":"Chuo Ward","price":"入場無料","priceEn":"Free to enter","priceNote":"買い物は別途","priceNoteEn":"Shopping costs extra","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"地下鉄御堂筋線 心斎橋駅","stationEn":"Shinsaibashi Sta. (Midosuji Line)","walk":"直結","walkEn":"Directly connected","official":"https://shinsaibashi.parco.jp/","desc":"ポップカルチャーからハイブランドまで揃うファッションビル。上層階にはグッズショップも充実。","descEn":"A fashion building spanning pop culture goods to high-end brands, with well-stocked character shops on the upper floors."},{"id":30,"cat":"view","wardKey":"suita","age":["kids","family","teens","couple","adult"],"budget":2,"rating":4.3,"rec":true,"aliases":["オオサカホイール","大阪ホイール","エキスポシティ観覧車"],"closedDay":"無休","closedDayEn":"No fixed closures","name":"REDHORSE OSAKA WHEEL","nameEn":"Redhorse Osaka Wheel","area":"吹田市（万博公園）","areaEn":"Suita City (Expo Park)","price":"1名 1,000円〜","priceEn":"From ¥1,000 per person","priceNote":"日本最大級の観覧車","priceNoteEn":"One of Japan's largest Ferris wheels","duration":"30分","durationEn":"30 minutes","rainOk":true,"station":"大阪モノレール 万博記念公園駅","stationEn":"Bampaku-kinen-koen Sta. (Osaka Monorail)","walk":"直結","walkEn":"Directly connected","official":"https://osaka-wheel.com/","desc":"EXPOCITY内にそびえる日本最大級の観覧車。ゴンドラからは万博記念公園と大阪平野を一望できる。","descEn":"One of Japan's tallest Ferris wheels, towering over EXPOCITY with sweeping views of Expo Park and the Osaka plain."},{"id":31,"cat":"shop","wardKey":"suita","age":["kids","family","teens","couple","adult"],"budget":1,"rating":4.2,"rec":false,"aliases":["エキスポシティ"],"closedDay":"無休","closedDayEn":"No fixed closures","name":"EXPOCITY","nameEn":"EXPOCITY","area":"吹田市（万博公園）","areaEn":"Suita City (Expo Park)","price":"入場無料","priceEn":"Free to enter","priceNote":"内部の各施設は別途料金","priceNoteEn":"Individual attractions inside charge separately","duration":"半日","durationEn":"half a day","rainOk":true,"station":"大阪モノレール 万博記念公園駅","stationEn":"Bampaku-kinen-koen Sta. (Osaka Monorail)","walk":"直結","walkEn":"Directly connected","official":"https://www.expocity-mf.com/","desc":"観覧車・水族館・ポケモン施設などが集まる西日本最大級のエンタメ商業施設。","descEn":"One of western Japan's largest entertainment complexes, combining a Ferris wheel, aquarium, and character-themed attractions."},{"id":32,"cat":"museum","wardKey":"suita","age":["teens","couple","adult","family"],"budget":2,"rating":4.4,"rec":true,"aliases":["みんぱく","民博"],"closedDay":"水曜日","closedDayEn":"Wednesdays","name":"国立民族学博物館（みんぱく）","nameEn":"National Museum of Ethnology (Minpaku)","area":"吹田市（万博公園）","areaEn":"Suita City (Expo Park)","price":"一般 780円","priceEn":"General admission ¥780","priceNote":"高校生以下無料","priceNoteEn":"Free for high school age and under","duration":"2〜3時間","durationEn":"2–3 hours","rainOk":true,"station":"大阪モノレール 万博記念公園駅","stationEn":"Bampaku-kinen-koen Sta. (Osaka Monorail)","walk":"徒歩15分","walkEn":"15-min walk","official":"https://www.minpaku.ac.jp/","desc":"世界の暮らしと文化を集めた世界最大級の民族学博物館。展示の物量と密度は圧巻。","descEn":"One of the world's largest ethnology museums, gathering artifacts from cultures around the globe."},{"id":33,"cat":"museum","wardKey":"suita","age":["teens","couple","adult"],"budget":1,"rating":4.3,"rec":false,"closedDay":"年末年始・指定休日","closedDayEn":"Year-end/New Year and designated days","name":"アサヒビール吹田工場","nameEn":"Asahi Beer Suita Factory","area":"吹田市","areaEn":"Suita City","price":"見学無料","priceEn":"Free tour","priceNote":"事前予約制","priceNoteEn":"Advance reservation required","duration":"1.5時間","durationEn":"1.5 hours","rainOk":true,"station":"JR吹田駅","stationEn":"JR Suita Sta.","walk":"徒歩3分","walkEn":"3-min walk","official":"https://www.asahibeer.co.jp/brewery/suita/","desc":"ビールの製造工程を見学し、できたてを試飲できる工場見学。国内最古のアサヒビール工場のひとつ。","descEn":"A brewery tour ending in a freshly poured tasting — one of Asahi's oldest factories in Japan."},{"id":34,"cat":"shop","wardKey":"tsurumi","age":["family","couple","adult"],"budget":1,"rating":4,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"三井アウトレットパーク大阪鶴見","nameEn":"Mitsui Outlet Park Osaka Tsurumi","area":"鶴見区","areaEn":"Tsurumi Ward","price":"入場無料","priceEn":"Free to enter","priceNote":"買い物は別途","priceNoteEn":"Shopping costs extra","duration":"2〜3時間","durationEn":"2–3 hours","rainOk":true,"station":"地下鉄長堀鶴見緑地線 門真南駅","stationEn":"Kadoma-minami Sta.","walk":"徒歩6分","walkEn":"6-min walk","official":"https://mitsui-shopping-park.com/mop/osaka/","desc":"国内外の人気ブランドがお得に揃うアウトレットモール。鶴見緑地公園にも近い。","descEn":"An outlet mall with discounted domestic and international brands, close to Tsurumi Ryokuchi Park."},{"id":35,"cat":"shop","wardKey":"minato","age":["kids","family","couple"],"budget":1,"rating":3.9,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"天保山マーケットプレース","nameEn":"Tempozan Marketplace","area":"港区","areaEn":"Minato Ward","price":"入場無料","priceEn":"Free to enter","priceNote":"","priceNoteEn":"","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"地下鉄中央線 大阪港駅","stationEn":"Osakako Sta.","walk":"徒歩5分","walkEn":"5-min walk","official":"https://www.kaiyukan.com/thv/marketplace/","desc":"海遊館に隣接するグルメ・雑貨のショッピングモール。ベイエリア観光の合間の休憩に便利。","descEn":"A dining and gift-shop mall next to Kaiyukan — a handy stop while touring the bay area."},{"id":36,"cat":"museum","wardKey":"kita","age":["kids","family","teens"],"budget":2,"rating":4.3,"rec":true,"aliases":["科学館"],"closedDay":"月曜日（祝日の場合は翌日）","closedDayEn":"Mondays (next day if a holiday)","name":"大阪市立科学館","nameEn":"Osaka Science Museum","area":"北区（中之島）","areaEn":"Kita Ward (Nakanoshima)","price":"展示場 大人400円 / プラネタリウム 大人600円","priceEn":"Exhibits ¥400 / Planetarium ¥600 (adult)","priceNote":"","priceNoteEn":"","duration":"2時間","durationEn":"2 hours","rainOk":true,"station":"京阪中之島線 渡辺橋駅/地下鉄四つ橋線 肥後橋駅","stationEn":"Watanabebashi / Higobashi Sta.","walk":"徒歩5〜8分","walkEn":"5–8 min walk","official":"https://www.sci-museum.jp/","desc":"プラネタリウムと体験型の科学展示が揃う中之島の科学館。子どもから大人まで楽しめる。","descEn":"A hands-on science museum and planetarium on Nakanoshima, enjoyable for kids and adults alike."},{"id":37,"cat":"museum","wardKey":"kita","age":["adult","couple","teens"],"budget":1,"rating":4.1,"rec":false,"closedDay":"月曜日","closedDayEn":"Mondays","name":"国立国際美術館","nameEn":"National Museum of Art, Osaka","area":"北区（中之島）","areaEn":"Kita Ward (Nakanoshima)","price":"一般 430円","priceEn":"General admission ¥430","priceNote":"展覧会により変動","priceNoteEn":"Varies by exhibition","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"京阪中之島線 渡辺橋駅","stationEn":"Watanabebashi Sta.","walk":"徒歩5分","walkEn":"5-min walk","official":"https://www.nmao.go.jp/","desc":"地下に広がる現代美術専門の美術館。ユニークな地上部の彫刻オブジェも目印。","descEn":"A contemporary art museum built entirely underground, marked above ground by a distinctive sculptural entrance."},{"id":38,"cat":"museum","wardKey":"kita","age":["adult","couple"],"budget":2,"rating":4.2,"rec":false,"closedDay":"月曜日","closedDayEn":"Mondays","name":"大阪中之島美術館","nameEn":"Nakanoshima Museum of Art, Osaka","area":"北区（中之島）","areaEn":"Kita Ward (Nakanoshima)","price":"展覧会により変動（目安2,000円）","priceEn":"Varies by exhibition (around ¥2,000)","priceNote":"","priceNoteEn":"","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"京阪中之島線 渡辺橋駅","stationEn":"Watanabebashi Sta.","walk":"徒歩5分","walkEn":"5-min walk","official":"https://nakka-art.jp/","desc":"黒い箱型の外観が印象的な近現代美術専門の美術館。中之島の新しいランドマーク。","descEn":"A modern and contemporary art museum in a striking black cube — one of Nakanoshima's newest landmarks."},{"id":39,"cat":"museum","wardKey":"kita","age":["adult","couple"],"budget":2,"rating":4.2,"rec":false,"closedDay":"月曜日","closedDayEn":"Mondays","name":"大阪市立東洋陶磁美術館","nameEn":"Museum of Oriental Ceramics, Osaka","area":"北区（中之島）","areaEn":"Kita Ward (Nakanoshima)","price":"展覧会により変動（目安1,800円）","priceEn":"Varies by exhibition (around ¥1,800)","priceNote":"","priceNoteEn":"","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"地下鉄堺筋線/京阪本線 北浜駅","stationEn":"Kitahama Sta.","walk":"徒歩3分","walkEn":"3-min walk","official":"https://www.moco.or.jp/","desc":"世界屈指の東洋陶磁コレクションを誇る美術館。中之島公園散策の途中に立ち寄りやすい。","descEn":"A museum with one of the world's finest collections of East Asian ceramics, an easy stop while strolling Nakanoshima Park."},{"id":40,"cat":"nature","wardKey":"kita","age":["kids","family","teens","couple","adult"],"budget":1,"rating":4.3,"rec":true,"closedDay":"無休","closedDayEn":"No fixed closures","name":"中之島公園 バラ園","nameEn":"Nakanoshima Park Rose Garden","area":"北区（中之島）","areaEn":"Kita Ward (Nakanoshima)","price":"入園無料","priceEn":"Free to enter","priceNote":"見頃は5月上旬〜下旬","priceNoteEn":"Best viewing early to late May","duration":"1時間","durationEn":"1 hour","rainOk":false,"station":"京阪中之島線 なにわ橋駅/北浜駅","stationEn":"Naniwabashi / Kitahama Sta.","walk":"直結","walkEn":"Directly connected","official":"https://osaka-info.jp/spot/nakanoshima-park/","desc":"約310品種のバラが咲く都会のオアシス。レトロ建築と水辺の散策も楽しめる無料スポット。","descEn":"An urban oasis with about 310 rose varieties — a free spot to stroll past retro architecture along the water."},{"id":41,"cat":"museum","wardKey":"kita","age":["family","adult"],"budget":1,"rating":4,"rec":false,"closedDay":"水曜日","closedDayEn":"Wednesdays","name":"造幣博物館","nameEn":"Japan Mint Museum","area":"北区","areaEn":"Kita Ward","price":"入館無料","priceEn":"Free admission","priceNote":"桜の通り抜けは例年4月","priceNoteEn":"The cherry-blossom walk is held every April","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"地下鉄 南森町駅/JR 大阪天満宮駅","stationEn":"Minami-morimachi / Osaka-Temmangu Sta.","walk":"徒歩15分","walkEn":"15-min walk","official":"https://www.mint.go.jp/","desc":"貨幣の歴史を無料で学べる博物館。硬貨の製造工程を紹介する展示が充実。","descEn":"A free museum tracing the history of Japanese currency, with detailed exhibits on how coins are minted."},{"id":42,"cat":"castle","wardKey":"kita","age":["family","adult","couple"],"budget":1,"rating":4.2,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"大阪天満宮","nameEn":"Osaka Temmangu Shrine","area":"北区","areaEn":"Kita Ward","price":"参拝無料","priceEn":"Free to visit","priceNote":"宝物殿は有料","priceNoteEn":"The treasure hall charges admission","duration":"1時間","durationEn":"1 hour","rainOk":false,"station":"JR 大阪天満宮駅/地下鉄 南森町駅","stationEn":"Osaka-Temmangu / Minami-morimachi Sta.","walk":"徒歩3分","walkEn":"3-min walk","official":"https://osakatemmangu.or.jp/","desc":"学問の神様・菅原道真を祀る古社。天神橋筋商店街の起点としても親しまれている。","descEn":"A historic shrine dedicated to the god of learning, Sugawara no Michizane — the traditional starting point of Tenjinbashi-suji."},{"id":43,"cat":"shop","wardKey":"kita","age":["kids","family","teens","couple","adult"],"budget":1,"rating":4.1,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"天神橋筋商店街","nameEn":"Tenjinbashi-suji Shopping Street","area":"北区","areaEn":"Kita Ward","price":"散策は無料","priceEn":"Free to walk around","priceNote":"全長2.6kmの日本一長い商店街","priceNoteEn":"At 2.6km, Japan's longest shopping arcade","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"地下鉄 南森町駅/扇町駅/天神橋筋六丁目駅","stationEn":"Minami-morimachi / Ogimachi / Tenjinbashisuji-Rokuchome Sta.","walk":"直結","walkEn":"Directly connected","official":"https://www.tenjin123.com/","desc":"日本一長いアーケード商店街。昔ながらの商店から新しい店まで混在する生活感あふれる通り。","descEn":"Japan's longest covered shopping arcade, mixing old-school shops with newer stores in a lived-in neighborhood feel."},{"id":44,"cat":"shop","wardKey":"kita","age":["teens","couple","adult"],"budget":2,"rating":4,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"中崎町","nameEn":"Nakazakicho","area":"北区","areaEn":"Kita Ward","price":"散策は無料","priceEn":"Free to walk around","priceNote":"カフェ利用は別途","priceNoteEn":"Cafe visits cost extra","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":false,"station":"地下鉄谷町線 中崎町駅","stationEn":"Nakazakicho Sta.","walk":"徒歩1分","walkEn":"1-min walk","official":"https://osaka-info.jp/","desc":"梅田の隣にありながら昭和レトロな町並みが残るエリア。古民家カフェや雑貨店が点在する。","descEn":"A pocket of Showa-era retro streets right next to Umeda, dotted with old-house cafes and small shops."},{"id":45,"cat":"castle","wardKey":"chuo","age":["family","adult","teens"],"budget":1,"rating":4.2,"rec":false,"closedDay":"火曜日（祝日の場合は翌日）","closedDayEn":"Tuesdays (next day if a holiday)","name":"大阪歴史博物館","nameEn":"Osaka Museum of History","area":"中央区","areaEn":"Chuo Ward","price":"常設展 大人600円","priceEn":"Permanent exhibit, adult ¥600","priceNote":"","priceNoteEn":"","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"地下鉄 谷町四丁目駅","stationEn":"Tanimachi 4-chome Sta.","walk":"直結","walkEn":"Directly connected","official":"https://www.osakamushis.jp/","desc":"難波宮跡の上に建つ博物館。大阪城を望む展望フロアと古代からの歴史展示が見どころ。","descEn":"A museum built above the ruins of Naniwa Palace, with a view floor overlooking Osaka Castle and exhibits spanning ancient history."},{"id":46,"cat":"museum","wardKey":"chuo","age":["kids","family"],"budget":1,"rating":3.9,"rec":false,"closedDay":"火曜日","closedDayEn":"Tuesdays","name":"NHK大阪放送局 BKプラザ","nameEn":"NHK Osaka BK Plaza","area":"中央区","areaEn":"Chuo Ward","price":"入館無料","priceEn":"Free admission","priceNote":"","priceNoteEn":"","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"地下鉄 谷町四丁目駅","stationEn":"Tanimachi 4-chome Sta.","walk":"徒歩4分","walkEn":"4-min walk","official":"https://www.nhk.or.jp/osaka/","desc":"ニュースやお天気キャスターを体験できる無料の放送局見学施設。子ども連れに人気。","descEn":"A free broadcast-studio experience where visitors can try being a news or weather presenter — popular with families."},{"id":47,"cat":"castle","wardKey":"naniwa","age":["family","teens","adult"],"budget":1,"rating":4.1,"rec":true,"closedDay":"無休","closedDayEn":"No fixed closures","name":"難波八阪神社","nameEn":"Namba Yasaka Shrine","area":"浪速区","areaEn":"Naniwa Ward","price":"参拝無料","priceEn":"Free to visit","priceNote":"","priceNoteEn":"","duration":"30分","durationEn":"30 minutes","rainOk":false,"station":"地下鉄 なんば駅/大国町駅","stationEn":"Namba / Daikokucho Sta.","walk":"徒歩6分","walkEn":"6-min walk","official":"https://nambayasaka.jp/","desc":"高さ12mの巨大な獅子頭の舞台が名物の神社。写真映えするミナミの隠れた人気スポット。","descEn":"A shrine famous for its 12m stage shaped like a giant lion's head — a hidden photo favorite in Minami."},{"id":48,"cat":"shop","wardKey":"naniwa","age":["teens","couple","adult"],"budget":1,"rating":4,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"新世界 ジャンジャン横丁","nameEn":"Shinsekai Janjan Yokocho","area":"浪速区","areaEn":"Naniwa Ward","price":"散策は無料","priceEn":"Free to walk around","priceNote":"飲食は別途","priceNoteEn":"Food and drink cost extra","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"地下鉄 動物園前駅","stationEn":"Dobutsuen-mae Sta.","walk":"徒歩1分","walkEn":"1-min walk","official":"https://osaka-info.jp/","desc":"通天閣のふもとに広がるレトロな横丁。串カツと将棋クラブが並ぶ昭和の空気が残る一角。","descEn":"A retro alley at the foot of Tsutenkaku, lined with kushikatsu stalls and shogi clubs from a bygone Osaka."},{"id":49,"cat":"shop","wardKey":"abeno","age":["kids","family","teens","couple","adult"],"budget":1,"rating":4,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"あべのキューズモール","nameEn":"Abeno Q's Mall","area":"阿倍野区","areaEn":"Abeno Ward","price":"入場無料","priceEn":"Free to enter","priceNote":"買い物は別途","priceNoteEn":"Shopping costs extra","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"地下鉄 阿倍野駅/天王寺駅","stationEn":"Abeno / Tennoji Sta.","walk":"直結","walkEn":"Directly connected","official":"https://qs-mall.jp/abeno/","desc":"天王寺・阿倍野エリアの大型商業施設。屋上ランニングコースなどユニークな設備も。","descEn":"A large shopping complex in the Tennoji/Abeno area, with unique features like a rooftop running track."},{"id":50,"cat":"nature","wardKey":"tennoji","age":["kids","family","teens","couple","adult"],"budget":1,"rating":4.3,"rec":true,"aliases":["天王寺公園"],"closedDay":"無休","closedDayEn":"No fixed closures","name":"てんしば（天王寺公園）","nameEn":"Tenshiba (Tennoji Park)","area":"天王寺区","areaEn":"Tennoji Ward","price":"入園無料","priceEn":"Free to enter","priceNote":"","priceNoteEn":"","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":false,"station":"JR/地下鉄 天王寺駅","stationEn":"Tennoji Sta.","walk":"直結","walkEn":"Directly connected","official":"https://www.tennoji-park.jp/","desc":"ハルカスを見上げる広い芝生広場。カフェやドッグランもあり、街なかで気軽にくつろげる。","descEn":"A wide lawn looking up at Harukas 300, with cafes and a dog run — an easy place to relax in the city center."},{"id":51,"cat":"castle","wardKey":"tennoji","age":["family","adult"],"budget":1,"rating":4.1,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"四天王寺","nameEn":"Shitennoji Temple","area":"天王寺区","areaEn":"Tennoji Ward","price":"境内無料（中心伽藍は別途500円）","priceEn":"Grounds free (central precinct ¥500 extra)","priceNote":"聖徳太子が建立した日本最古級の官寺","priceNoteEn":"One of Japan's oldest state-founded temples, built by Prince Shotoku","duration":"1時間","durationEn":"1 hour","rainOk":false,"station":"地下鉄 四天王寺前夕陽ヶ丘駅","stationEn":"Shitennoji-mae Yuhigaoka Sta.","walk":"徒歩5分","walkEn":"5-min walk","official":"https://www.shitennoji.or.jp/","desc":"聖徳太子が建立した日本仏法最初の官寺。五重塔を中心とした伽藍配置が特徴。","descEn":"One of Japan's oldest state-founded temples, its five-story pagoda anchoring a classic temple layout."},{"id":52,"cat":"museum","wardKey":"higashisumiyoshi","age":["kids","family"],"budget":1,"rating":4.1,"rec":false,"closedDay":"月曜日（祝日の場合は翌平日）","closedDayEn":"Mondays (next weekday if a holiday)","name":"大阪市立自然史博物館","nameEn":"Osaka Museum of Natural History","area":"東住吉区（長居公園）","areaEn":"Higashisumiyoshi Ward (Nagai Park)","price":"大人 300円","priceEn":"Adult ¥300","priceNote":"","priceNoteEn":"","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"地下鉄 長居駅","stationEn":"Nagai Sta.","walk":"徒歩5分","walkEn":"5-min walk","official":"https://omnh.jp/","desc":"恐竜やクジラの骨格標本が並ぶ自然史博物館。長居植物園と合わせて一日過ごせる。","descEn":"A natural history museum with dinosaur and whale skeletons — combine it with Nagai Botanical Garden for a full day."},{"id":53,"cat":"nature","wardKey":"higashisumiyoshi","age":["kids","family","adult"],"budget":1,"rating":4,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"長居公園","nameEn":"Nagai Park","area":"東住吉区","areaEn":"Higashisumiyoshi Ward","price":"入園無料","priceEn":"Free to enter","priceNote":"植物園は別途有料","priceNoteEn":"The botanical garden charges separate admission","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":false,"station":"地下鉄 長居駅","stationEn":"Nagai Sta.","walk":"徒歩3分","walkEn":"3-min walk","official":"https://nagaipark.com/","desc":"陸上競技場や植物園、自然史博物館が集まる大きな都市公園。ジョギングや散策に人気。","descEn":"A large city park combining a stadium, botanical garden, and natural history museum — popular for jogging and strolls."},{"id":54,"cat":"castle","wardKey":"sumiyoshi","age":["family","adult","couple"],"budget":1,"rating":4.4,"rec":true,"aliases":["すみよっさん","住吉さん"],"closedDay":"無休","closedDayEn":"No fixed closures","name":"住吉大社","nameEn":"Sumiyoshi Taisha","area":"住吉区","areaEn":"Sumiyoshi Ward","price":"参拝無料","priceEn":"Free to visit","priceNote":"","priceNoteEn":"","duration":"1時間","durationEn":"1 hour","rainOk":false,"station":"南海本線 住吉大社駅","stationEn":"Sumiyoshitaisha Sta. (Nankai Main Line)","walk":"徒歩3分","walkEn":"3-min walk","official":"https://www.sumiyoshitaisha.net/","desc":"全国約2300社の住吉神社の総本社。国宝の本殿4棟と有名な反橋（太鼓橋）が見どころ。","descEn":"The head shrine of some 2,300 Sumiyoshi shrines nationwide, known for its four National Treasure halls and iconic arched bridge."},{"id":55,"cat":"shop","wardKey":"suminoe","age":["kids","family","couple","adult"],"budget":1,"rating":3.8,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"ATC（アジア太平洋トレードセンター）","nameEn":"Asia and Pacific Trade Center (ATC)","area":"住之江区","areaEn":"Suminoe Ward","price":"入場無料","priceEn":"Free to enter","priceNote":"","priceNoteEn":"","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"ニュートラム トレードセンター前駅","stationEn":"Trade Center-mae Sta. (New Tram)","walk":"直結","walkEn":"Directly connected","official":"https://www.atc-co.com/","desc":"海に面したベイエリアの複合施設。アウトレットやイベントホールが入り、さきしまコスモタワーとも近い。","descEn":"A waterfront complex with outlet shops and event halls, close to the Sakishima Cosmo Tower Observatory."},{"id":56,"cat":"nature","wardKey":"toyonaka","age":["kids","family","adult"],"budget":1,"rating":4.1,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"服部緑地公園","nameEn":"Hattori Ryokuchi Park","area":"豊中市","areaEn":"Toyonaka City","price":"入園無料","priceEn":"Free to enter","priceNote":"","priceNoteEn":"","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":false,"station":"地下鉄/北大阪急行 緑地公園駅","stationEn":"Ryokuchikoen Sta.","walk":"徒歩10分","walkEn":"10-min walk","official":"https://www.hattori-ryokuchi.jp/","desc":"広大な緑地に日本民家集落博物館やプールを備えた総合公園。ピクニックにも人気。","descEn":"A vast green park with an open-air museum of traditional Japanese houses and a pool — popular for picnics."},{"id":57,"cat":"view","wardKey":"konohana","age":["family","teens","adult"],"budget":1,"rating":4.2,"rec":true,"aliases":["フンデルトヴァッサー"],"closedDay":"日曜・祝日（要予約）","closedDayEn":"Sundays & holidays (reservation required)","name":"大阪広域環境施設組合 舞洲工場","nameEn":"Maishima Incineration Plant","area":"此花区（舞洲）","areaEn":"Konohana Ward (Maishima)","price":"見学無料","priceEn":"Free tour","priceNote":"事前予約制","priceNoteEn":"Advance reservation required","duration":"1.5時間","durationEn":"1.5 hours","rainOk":true,"station":"JRゆめ咲線 桜島駅からバス","stationEn":"Sakurajima Sta. (JR Yumesaki Line), then bus","walk":"バス利用","walkEn":"Bus connection","official":"https://osaka-info.jp/spot/maishima-plant/","desc":"芸術家フンデルトヴァッサーがデザインしたごみ焼却工場。奇抜な外観は無料で写真だけでも一見の価値あり。","descEn":"A waste incineration plant designed by artist Friedensreich Hundertwasser — its wildly colorful exterior is worth seeing even from outside."},{"id":58,"cat":"museum","wardKey":"kadoma","age":["teens","couple","adult"],"budget":1,"rating":4,"rec":false,"closedDay":"土日祝（2026年4月〜土曜も休館）","closedDayEn":"Weekends & holidays (Saturdays too from Apr 2026)","name":"パナソニックミュージアム","nameEn":"Panasonic Museum","area":"門真市","areaEn":"Kadoma City","price":"入館無料","priceEn":"Free admission","priceNote":"","priceNoteEn":"","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"京阪電車 西三荘駅","stationEn":"Nishisanso Sta. (Keihan)","walk":"徒歩2分","walkEn":"2-min walk","official":"https://www.panasonic.com/jp/corporate/history/panasonic-museum.html","desc":"創業者・松下幸之助の歩みと家電の歴史を無料で辿れる企業ミュージアム。","descEn":"A free corporate museum tracing founder Konosuke Matsushita's life and the history of home appliances."},{"id":59,"cat":"castle","wardKey":"kishiwada","age":["family","adult"],"budget":1,"rating":3.9,"rec":false,"closedDay":"月曜日","closedDayEn":"Mondays","name":"岸和田城","nameEn":"Kishiwada Castle","area":"岸和田市","areaEn":"Kishiwada City","price":"大人 300円","priceEn":"Adult ¥300","priceNote":"","priceNoteEn":"","duration":"1時間","durationEn":"1 hour","rainOk":false,"station":"南海本線 岸和田駅/蛸地蔵駅","stationEn":"Kishiwada / Takojizo Sta.","walk":"徒歩5〜15分","walkEn":"5–15 min walk","official":"https://www.city.kishiwada.lg.jp/page/36-kishiwadajyo.html","desc":"だんじり祭りで知られる岸和田のシンボル。天守からは市街地と海を見渡せる。","descEn":"The symbol of Kishiwada, home to the famous Danjiri Festival — the tower offers views over the town and sea."},{"id":60,"cat":"museum","wardKey":"kishiwada","age":["family","adult"],"budget":1,"rating":3.8,"rec":false,"closedDay":"月曜日","closedDayEn":"Mondays","name":"岸和田だんじり会館","nameEn":"Kishiwada Danjiri Kaikan","area":"岸和田市","areaEn":"Kishiwada City","price":"大人 600円","priceEn":"Adult ¥600","priceNote":"","priceNoteEn":"","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"南海本線 岸和田駅","stationEn":"Kishiwada Sta.","walk":"徒歩10分","walkEn":"10-min walk","official":"https://www.city.kishiwada.osaka.jp/site/kishiwada-side/danjiri-kaikan.html","desc":"勇壮なだんじり祭りの迫力を実物の山車と映像で体感できる施設。祭りの時期以外でも楽しめる。","descEn":"A hall where visitors can experience the energy of the Danjiri Festival through a real festival float and video, any time of year."},{"id":61,"cat":"shop","wardKey":"kishiwada","age":["kids","family"],"budget":1,"rating":3.7,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"岸和田カンカンベイサイドモール","nameEn":"Kishiwada Cancan Bayside Mall","area":"岸和田市","areaEn":"Kishiwada City","price":"入場無料","priceEn":"Free to enter","priceNote":"","priceNoteEn":"","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":true,"station":"南海本線 岸和田駅","stationEn":"Kishiwada Sta.","walk":"徒歩10分","walkEn":"10-min walk","official":"https://k-cancan.jp/","desc":"海沿いのショッピングモール。映画館やクライミング施設も併設し、岸和田観光の拠点になる。","descEn":"A seaside shopping mall with a cinema and climbing gym — a handy base for exploring Kishiwada."},{"id":62,"cat":"nature","wardKey":"minoh","age":["family","adult","couple"],"budget":1,"rating":4.3,"rec":true,"closedDay":"無休","closedDayEn":"No fixed closures","name":"箕面公園・箕面大滝","nameEn":"Minoo Park & Falls","area":"箕面市","areaEn":"Minoh City","price":"入園無料","priceEn":"Free to enter","priceNote":"滝までは徒歩40〜50分のハイキング","priceNoteEn":"About a 40–50 min hike to the falls","duration":"2〜3時間","durationEn":"2–3 hours","rainOk":false,"station":"阪急箕面線 箕面駅","stationEn":"Minoh Sta. (Hankyu Minoh Line)","walk":"徒歩5分（入口まで）","walkEn":"5-min walk (to entrance)","official":"https://www.mino-park.jp/","desc":"日本の滝百選に選ばれた落差33mの名瀑。紅葉シーズンは特に美しく、大阪屈指のハイキングスポット。","descEn":"A 33m waterfall ranked among Japan's 100 best, especially beautiful in autumn — one of Osaka's top hiking spots."},{"id":63,"cat":"castle","wardKey":"minoh","age":["family","adult","couple"],"budget":1,"rating":4.2,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"勝尾寺","nameEn":"Katsuoji Temple","area":"箕面市","areaEn":"Minoh City","price":"大人 500円","priceEn":"Adult ¥500","priceNote":"境内は無数の勝ちだるまで彩られる","priceNoteEn":"The grounds are filled with countless victory-daruma dolls","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":false,"station":"地下鉄御堂筋線 千里中央駅からバス","stationEn":"Senri-chuo Sta., then bus","walk":"バス利用","walkEn":"Bus connection","official":"https://katsuo-ji-temple.or.jp/","desc":"勝運祈願で知られる古刹。境内を埋め尽くす無数の「勝ちだるま」が圧巻の光景を作る。","descEn":"An old temple famous for prayers of victory, its grounds covered in a striking sea of daruma dolls."},{"id":64,"cat":"nature","wardKey":"sakai","age":["family","adult"],"budget":1,"rating":4,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"浜寺公園","nameEn":"Hamadera Park","area":"堺市","areaEn":"Sakai City","price":"入園無料","priceEn":"Free to enter","priceNote":"バラ庭園が名物","priceNoteEn":"Known for its rose garden","duration":"1〜2時間","durationEn":"1–2 hours","rainOk":false,"station":"南海本線 浜寺公園駅","stationEn":"Hamaderakoen Sta. (Nankai Main Line)","walk":"直結","walkEn":"Directly connected","official":"https://www.pref.osaka.lg.jp/hamaderakoen/","desc":"松林とバラ庭園が広がる海沿いの公園。明治時代からの歴史を持つ大阪府下有数の公園。","descEn":"A seaside park of pine groves and rose gardens, with a history dating back to the Meiji era."},{"id":65,"cat":"castle","wardKey":"sakai","age":["family","adult","teens"],"budget":1,"rating":4,"rec":true,"aliases":["大仙古墳","大山古墳","仁徳陵"],"closedDay":"無休","closedDayEn":"No fixed closures","name":"仁徳天皇陵古墳（大仙古墳）","nameEn":"Nintoku-tenno-ryo Kofun (Daisen Kofun)","area":"堺市","areaEn":"Sakai City","price":"見学無料","priceEn":"Free to visit","priceNote":"世界文化遺産・全長約486m","priceNoteEn":"UNESCO World Heritage site, about 486m long","duration":"1時間","durationEn":"1 hour","rainOk":false,"station":"JR阪和線 百舌鳥駅","stationEn":"Mozu Sta. (JR Hanwa Line)","walk":"徒歩すぐ","walkEn":"A short walk","official":"https://www.city.sakai.lg.jp/kanko/rekishi/dkofun/tansaku/nintokutenno.html","desc":"世界文化遺産に登録された日本最大の前方後円墳。周濠沿いを歩くだけでもその規模を体感できる。","descEn":"Japan's largest keyhole-shaped burial mound and a UNESCO World Heritage site — its scale is felt just by walking along the moat."},{"id":66,"cat":"nature","wardKey":"sakai","age":["family","adult"],"budget":1,"rating":4,"rec":false,"closedDay":"無休","closedDayEn":"No fixed closures","name":"大仙公園","nameEn":"Daisen Park","area":"堺市","areaEn":"Sakai City","price":"入園無料","priceEn":"Free to enter","priceNote":"","priceNoteEn":"","duration":"1時間","durationEn":"1 hour","rainOk":false,"station":"JR阪和線 百舌鳥駅","stationEn":"Mozu Sta. (JR Hanwa Line)","walk":"徒歩5分","walkEn":"5-min walk","official":"https://www.sakai-tcb.or.jp/spot/detail/98","desc":"仁徳天皇陵古墳に隣接する市のシンボルパーク。堺市博物館や日本庭園も園内にある。","descEn":"The city's symbolic park next to the Nintoku mausoleum, home to the Sakai City Museum and a Japanese garden."},{"id":67,"cat":"museum","wardKey":"sakai","age":["kids","family"],"budget":2,"rating":4.2,"rec":true,"aliases":["ビッグバン"],"closedDay":"月曜日","closedDayEn":"Mondays","name":"堺市立ビッグバン","nameEn":"Sakai City Big Bang","area":"堺市","areaEn":"Sakai City","price":"大人 1,000円","priceEn":"Adult ¥1,000","priceNote":"","priceNoteEn":"","duration":"2〜3時間","durationEn":"2–3 hours","rainOk":true,"station":"泉北高速鉄道 泉ケ丘駅からバス","stationEn":"Semboku-koen Sta., then bus","walk":"バス利用","walkEn":"Bus connection","official":"https://www.bigbang-sakai.jp/","desc":"巨大なドーム遊具など全身で遊べる屋内型児童館。雨の日の子ども連れに特に人気。","descEn":"An indoor children's play center with a giant dome climbing structure — especially popular on rainy days."},{"id":68,"cat":"park","wardKey":"sakai","age":["kids","family"],"budget":2,"rating":4,"rec":false,"closedDay":"不定休（要確認）","closedDayEn":"Irregular closures (check ahead)","name":"堺・緑のミュージアム ハーベストの丘","nameEn":"Sakai Harvest no Oka Farm Park","area":"堺市","areaEn":"Sakai City","price":"入園料 大人1,500円","priceEn":"Admission, adult ¥1,500","priceNote":"体験コンテンツは別途","priceNoteEn":"Activities cost extra","duration":"半日","durationEn":"half a day","rainOk":false,"station":"泉北高速鉄道 泉ケ丘駅からバス","stationEn":"Semboku-koen Sta., then bus","walk":"バス利用","walkEn":"Bus connection","official":"https://farm.or.jp/","desc":"動物のふれあいや収穫体験ができる体験型農業公園。小さな子ども連れの休日に向いている。","descEn":"A hands-on farm park with animal encounters and harvesting experiences — well suited to a family day out."},{"id":69,"cat":"view","wardKey":"sakai","age":["kids","family","teens","couple","adult"],"budget":1,"rating":4.1,"rec":true,"closedDay":"無休","closedDayEn":"No fixed closures","name":"堺市役所21階展望ロビー","nameEn":"Sakai City Hall 21F Observation Lobby","area":"堺市","areaEn":"Sakai City","price":"入場無料","priceEn":"Free to enter","priceNote":"","priceNoteEn":"","duration":"30分","durationEn":"30 minutes","rainOk":true,"station":"南海高野線 堺東駅","stationEn":"Sakai-Higashi Sta. (Nankai Koya Line)","walk":"徒歩3分","walkEn":"3-min walk","official":"https://www.city.sakai.lg.jp/kanko/kanko/oshirase/renewal-open.html","desc":"地上80mから仁徳天皇陵古墳の全景を見下ろせる無料展望ロビー。穴場の絶景スポット。","descEn":"A free observation lobby 80m up, looking straight down on the full outline of the Nintoku mausoleum — a hidden-gem view."},{"id":70,"cat":"museum","wardKey":"chuo","age":["adult"],"budget":1,"rating":3.7,"rec":false,"aliases":["企業家ミュージアム"],"closedDay":"日・月・祝","closedDayEn":"Sundays, Mondays & holidays","name":"大阪企業家ミュージアム","nameEn":"Osaka Museum of Business History","area":"中央区","areaEn":"Chuo Ward","price":"入館無料","priceEn":"Free admission","priceNote":"","priceNoteEn":"","duration":"1時間","durationEn":"1 hour","rainOk":true,"station":"地下鉄 堺筋本町駅/淀屋橋駅","stationEn":"Sakaisuji-Hommachi / Yodoyabashi Sta.","walk":"徒歩5分","walkEn":"5-min walk","official":"https://www.kigyoka.jp/","desc":"大阪を築いた実業家たちの足跡を紹介する無料の企業博物館。近代大阪の経済史を知る入口に。","descEn":"A free museum on the entrepreneurs who built modern Osaka — a good entry point into the city's economic history."}]</script>
+<script type="application/json" id="coursesData">[{"id":"minami","venueIds":[5,7],"area":{"ja":"難波","en":"Namba"},"title":{"ja":"ミナミ定番コース","en":"Classic Minami Course"},"summary":{"ja":"道頓堀のネオン街を歩いたあと、なんばグランド花月で生の笑いを。どちらも難波駅から徒歩圏。","en":"Walk Dotonbori's neon streets, then catch live comedy at Namba Grand Kagetsu — both a short walk from Namba Station."},"meta":{"ja":"所要目安 半日〜1日","en":"About half a day to a full day"}},{"id":"bay","venueIds":[3,12,16],"area":{"ja":"大阪港","en":"Osakako"},"title":{"ja":"ベイエリア家族コース","en":"Bay Area Family Course"},"summary":{"ja":"海遊館でジンベエザメ、大観覧車で大阪湾を一望、レゴランドで仕上げの遊び時間。3施設とも大阪港駅から徒歩圏。","en":"See whale sharks at Kaiyukan, take in Osaka Bay from the Ferris wheel, then finish with playtime at LEGOLAND — all near Osakako Station."},"meta":{"ja":"所要目安 半日","en":"About half a day"}},{"id":"kita","venueIds":[4,15],"area":{"ja":"梅田","en":"Umeda"},"title":{"ja":"梅田夜景さんぽコース","en":"Umeda Night View Course"},"summary":{"ja":"梅田スカイビルの空中庭園で夜景を眺めたあと、HEP FIVEの赤い観覧車へ。梅田駅周辺で完結。","en":"Take in the night view from Umeda Sky Building, then ride the red HEP FIVE Ferris wheel — both near Umeda Station."},"meta":{"ja":"所要目安 2時間程度","en":"About 2 hours"}},{"id":"tennoji","venueIds":[6,10],"area":{"ja":"天王寺","en":"Tennoji"},"title":{"ja":"天王寺・新今宮コース","en":"Tennoji & Shin-Imamiya Course"},"summary":{"ja":"ハルカス300の展望台から大阪を一望したあと、スパワールドで温泉巡り。天王寺エリアで一日過ごせる。","en":"Take in the view from Harukas 300, then unwind in Spa World's baths from around the world — a full day around Tennoji."},"meta":{"ja":"所要目安 半日〜1日","en":"About half a day to a full day"}},{"id":"shinsekai","venueIds":[17,10,22],"area":{"ja":"新世界","en":"Shinsekai"},"title":{"ja":"新世界レトロコース","en":"Retro Shinsekai Course"},"summary":{"ja":"通天閣で下町の眺めを楽しみ、天王寺動物園を経て、スパワールドで一日の疲れを癒す。3施設とも動物園前・新今宮駅周辺。","en":"Take in downtown views from Tsutenkaku, stop by Tennoji Zoo, then unwind at Spa World — all near Dobutsuen-mae / Shin-Imamiya Station."},"meta":{"ja":"所要目安 半日〜1日","en":"About half a day to a full day"}},{"id":"minami-food","venueIds":[18,19,5],"area":{"ja":"心斎橋・難波","en":"Shinsaibashi / Namba"},"title":{"ja":"ミナミ食い倒れコース","en":"Minami Foodie Course"},"summary":{"ja":"心斎橋筋商店街と黒門市場で食べ歩き、そのまま道頓堀のネオン街へ。中央区エリアを歩いて周遊できる。","en":"Graze your way through Shinsaibashi-suji and Kuromon Ichiba Market, then walk on to the neon of Dotonbori — all within Chuo Ward."},"meta":{"ja":"所要目安 半日","en":"About half a day"}},{"id":"nakanoshima-art","venueIds":[36,37,38,39,40],"area":{"ja":"中之島","en":"Nakanoshima"},"title":{"ja":"中之島アート・サイエンスコース","en":"Nakanoshima Art & Science Course"},"summary":{"ja":"科学館・国立国際美術館・大阪中之島美術館・東洋陶磁美術館・バラ園と、渡辺橋〜北浜エリアに集まる文化施設を歩いて回る。","en":"Walk between the Science Museum, National Museum of Art, Nakanoshima Museum of Art, Museum of Oriental Ceramics, and the rose garden — all clustered around Watanabebashi and Kitahama."},"meta":{"ja":"所要目安 半日〜1日","en":"About half a day to a full day"}},{"id":"sakai-kofun","venueIds":[65,66,69],"area":{"ja":"堺","en":"Sakai"},"title":{"ja":"堺・古墳めぐりコース","en":"Sakai Kofun Course"},"summary":{"ja":"仁徳天皇陵古墳と大仙公園を歩いたあと、堺市役所21階展望ロビーから古墳全体を見下ろす。百舌鳥駅・堺東駅エリアで完結。","en":"Walk the Nintoku mausoleum and Daisen Park, then look down on the whole burial mound from Sakai City Hall's observation lobby — all around Mozu and Sakai-Higashi Stations."},"meta":{"ja":"所要目安 半日","en":"About half a day"}},{"id":"kishiwada-retro","venueIds":[59,60,61],"area":{"ja":"岸和田","en":"Kishiwada"},"title":{"ja":"岸和田レトロコース","en":"Retro Kishiwada Course"},"summary":{"ja":"岸和田城とだんじり会館で祭りの街の歴史を知り、カンカンベイサイドモールで海辺の時間を過ごす。岸和田駅周辺で一日楽しめる。","en":"Learn the history of Osaka's festival town at Kishiwada Castle and the Danjiri Kaikan, then unwind by the sea at Cancan Bayside Mall — all around Kishiwada Station."},"meta":{"ja":"所要目安 半日〜1日","en":"About half a day to a full day"}}]</script>
+
+<script>
+(function(){
+  var LANG_KEY = "osakaGuideLang";
+  var FAV_KEY = "osakaGuideFavorites";
+
+  var UI = {
+    ja:{
+      eyebrow:"OSAKA ENTERTAINMENT GUIDE",
+      title:"大阪 娯楽施設ガイド",
+      lead:"USJ から道頓堀の夜景、下町の温泉まで。年齢層・予算・おすすめ度で絞り込んで、今日行く場所を見つける。",
+      statTotal:"掲載施設", statCat:"カテゴリ", statRec:"編集部おすすめ", statFav:"お気に入り登録中",
+      exploreLabel:"テーマから探す",
+      coursesHeading:"モデルコース",
+      coursesSub:"エリアが近い施設を組み合わせた定番プラン。施設名をタップすると下の一覧に絞り込みます。",
+      coursesCountLabel:" コース・横にスワイプ →",
+      familyFriendly:"◎ ファミリー向け",
+      courseOpenAll:"このコースをすべて見る →",
+      gridEyebrow:"ALL VENUES",
+      gridHeading:"施設一覧",
+      courseBannerPrefix:"モデルコース「", courseBannerSuffix:"」を表示中（{n}件・周る順）",
+      courseBannerClear:"通常の一覧に戻る",
+      searchPlaceholder:"施設名やエリアで検索（例: 海遊館 / 難波）",
+      recToggle:"おすすめのみ", favToggle:"お気に入りのみ", filterToggle:"絞り込み",
+      viewList:"一覧", viewArea:"エリア別",
+      optRec:"並び替え: おすすめ順", optRating:"評価が高い順", optBudget:"予算が低い順", optName:"名前順",
+      labelWard:"市区町村", labelAge:"年齢層", labelBudget:"予算の目安", labelCat:"カテゴリ", labelMisc:"こだわり",
+      resultSuffix:"件表示中", copyLink:"この条件のリンクをコピー", copyDone:"コピーしました ✓", reset:"絞り込みをリセット",
+      recBadge:"おすすめ", favAria:"お気に入りに追加",
+      official:"公式サイト", route:"経路を調べる",
+      emptyFav:"まだお気に入りがありません。カードのハートマークをタップして追加できます。",
+      emptyGeneral:"条件に合う施設が見つかりませんでした。絞り込みを調整してみてください。",
+      durationPrefix:"所要目安 ",
+      closedLabel:"定休日: ",
+      footer:"料金は2026年8月時点の調査に基づく目安です。変動制の施設や改定直後の施設もあるため、最新の金額は各カードの「公式サイト」リンクから必ずご確認ください。イラストは施設の雰囲気を伝えるオリジナル制作物です。実際の写真は「公式サイト」「経路を調べる」リンク先でご覧いただけます。",
+      footerTagline:"年齢層・予算・エリアで探す、非公式の大阪おでかけガイド。",
+      footerAreaHeading:"エリアから探す", footerCatHeading:"カテゴリから探す", footerAboutHeading:"このサイトについて",
+      footerDisclaimer:"大阪の観光公式機関とは無関係の、個人制作による非公式ファンガイドです。",
+      langBtn:"EN"
+    },
+    en:{
+      eyebrow:"OSAKA ENTERTAINMENT GUIDE",
+      title:"Osaka Entertainment Guide",
+      lead:"From USJ to the Dotonbori night skyline to a neighborhood hot spring — filter by age group, budget, and editor's picks to find where to go today.",
+      statTotal:"Venues listed", statCat:"Categories", statRec:"Editor's picks", statFav:"Saved favorites",
+      exploreLabel:"Browse by theme",
+      coursesHeading:"Suggested Courses",
+      coursesSub:"Nearby venues paired into ready-made plans. Tap a venue name to filter the list below.",
+      coursesCountLabel:" courses · swipe for more →",
+      familyFriendly:"◎ Family-friendly",
+      courseOpenAll:"See the whole course →",
+      gridEyebrow:"ALL VENUES",
+      gridHeading:"All Venues",
+      courseBannerPrefix:"Showing the “", courseBannerSuffix:"” course ({n} stops, in route order)",
+      courseBannerClear:"Back to the full list",
+      searchPlaceholder:"Search by name or area (e.g. Kaiyukan / Namba)",
+      recToggle:"Picks only", favToggle:"Favorites only", filterToggle:"Filters",
+      viewList:"List", viewArea:"By Area",
+      optRec:"Sort: Editor's picks", optRating:"Highest rated", optBudget:"Lowest budget", optName:"Name (A–Z)",
+      labelWard:"Ward / City", labelAge:"Age group", labelBudget:"Budget", labelCat:"Category", labelMisc:"Extras",
+      resultSuffix:"results", copyLink:"Copy link to this view", copyDone:"Copied ✓", reset:"Reset filters",
+      recBadge:"Pick", favAria:"Add to favorites",
+      official:"Official site", route:"Get directions",
+      emptyFav:"No favorites yet. Tap the heart on a card to save it.",
+      emptyGeneral:"No venues match these filters. Try adjusting them.",
+      durationPrefix:"About ",
+      closedLabel:"Closed: ",
+      footer:"Prices are estimates as of August 2026. Some venues use dynamic pricing or have recently revised rates, so always confirm the current amount via each card's “Official site” link. The artwork is original illustration conveying each venue's mood, not a photo — real photos are available via the “Official site” and “Get directions” links.",
+      footerTagline:"An unofficial Osaka outing guide — browse by age group, budget, and area.",
+      footerAreaHeading:"Browse by area", footerCatHeading:"Browse by category", footerAboutHeading:"About this site",
+      footerDisclaimer:"An independent, unofficial fan guide, not affiliated with any official Osaka tourism body.",
+      langBtn:"日本語"
+    }
+  };
+
+  function L(pair){ return pair[state.lang] !== undefined ? pair[state.lang] : pair.ja; }
+
+  var AGE = {
+    kids:{ja:"子供", en:"Kids"},
+    family:{ja:"ファミリー", en:"Family"},
+    teens:{ja:"学生・友達", en:"Teens & friends"},
+    couple:{ja:"カップル", en:"Couples"},
+    adult:{ja:"大人", en:"Adults"}
+  };
+  // ---- `color` drives icons/backgrounds; `textColor` is a darkened, WCAG-AA-safe variant
+  //      used wherever a category color sits directly behind small text ----
+  var CAT = {
+    park:{label:{ja:"テーマパーク", en:"Theme park"}, color:"var(--c-park)", textColor:"var(--c-park-text)"},
+    aqua:{label:{ja:"水族館・生き物", en:"Aquarium & animals"}, color:"var(--c-aqua)", textColor:"var(--c-aqua-text)"},
+    view:{label:{ja:"展望・夜景", en:"Observatory & views"}, color:"var(--c-view)", textColor:"var(--c-view-text)"},
+    castle:{label:{ja:"歴史・文化", en:"History & culture"}, color:"var(--c-castle)", textColor:"var(--c-castle-text)"},
+    shop:{label:{ja:"街歩き・娯楽街", en:"Street & entertainment"}, color:"var(--c-shop)", textColor:"var(--c-shop-text)"},
+    onsen:{label:{ja:"温泉・スパ", en:"Hot spring & spa"}, color:"var(--c-onsen)", textColor:"var(--c-onsen-text)"},
+    museum:{label:{ja:"ミュージアム", en:"Museum"}, color:"var(--c-museum)", textColor:"var(--c-museum-text)"},
+    arcade:{label:{ja:"ゲーム・アミューズ", en:"Arcade & games"}, color:"var(--c-arcade)", textColor:"var(--c-arcade-text)"},
+    nature:{label:{ja:"公園・自然", en:"Parks & nature"}, color:"var(--c-nature)", textColor:"var(--c-nature-text)"}
+  };
+  var BUDGET = {
+    1:{ja:"無料〜¥", en:"Free–¥"},
+    2:{ja:"¥¥（〜3,000円）", en:"¥¥ (up to ¥3,000)"},
+    3:{ja:"¥¥¥（3,000円〜）", en:"¥¥¥ (¥3,000+)"}
+  };
+  var MISC = { rain:{ja:"雨の日でもOK", en:"Rainy-day OK"} };
+  var WARD = {
+    konohana:{ja:"此花区", en:"Konohana Ward"},
+    chuo:{ja:"中央区", en:"Chuo Ward"},
+    minato:{ja:"港区", en:"Minato Ward"},
+    kita:{ja:"北区", en:"Kita Ward"},
+    abeno:{ja:"阿倍野区", en:"Abeno Ward"},
+    naniwa:{ja:"浪速区", en:"Naniwa Ward"},
+    tennoji:{ja:"天王寺区", en:"Tennoji Ward"},
+    suminoe:{ja:"住之江区", en:"Suminoe Ward"},
+    suita:{ja:"吹田市", en:"Suita City"},
+    ikeda:{ja:"池田市", en:"Ikeda City"},
+    hirakata:{ja:"枚方市", en:"Hirakata City"},
+    tsurumi:{ja:"鶴見区", en:"Tsurumi Ward"},
+    higashisumiyoshi:{ja:"東住吉区", en:"Higashisumiyoshi Ward"},
+    sumiyoshi:{ja:"住吉区", en:"Sumiyoshi Ward"},
+    toyonaka:{ja:"豊中市", en:"Toyonaka City"},
+    kadoma:{ja:"門真市", en:"Kadoma City"},
+    kishiwada:{ja:"岸和田市", en:"Kishiwada City"},
+    minoh:{ja:"箕面市", en:"Minoh City"},
+    sakai:{ja:"堺市", en:"Sakai City"},
+    various:{ja:"各所（店舗による）", en:"Varies by branch"}
+  };
+
+  // ---- broader region grouping, used by the "area view" to cluster wards into recognizable zones ----
+  var REGIONS = [
+    {key:"central", label:{ja:"キタ・ミナミ（大阪市中心部）", en:"Central Osaka (Kita / Minami)"}},
+    {key:"bay", label:{ja:"ベイエリア", en:"Bay Area"}},
+    {key:"hokusetsu", label:{ja:"北摂エリア", en:"Hokusetsu (North Osaka)"}},
+    {key:"senshu", label:{ja:"堺・泉州エリア", en:"Sakai & Senshu"}}
+  ];
+  var WARD_REGION = {
+    kita:"central", chuo:"central", naniwa:"central", abeno:"central", tennoji:"central",
+    sumiyoshi:"central", higashisumiyoshi:"central", various:"central",
+    minato:"bay", suminoe:"bay", konohana:"bay",
+    suita:"hokusetsu", ikeda:"hokusetsu", toyonaka:"hokusetsu", minoh:"hokusetsu", kadoma:"hokusetsu",
+    tsurumi:"hokusetsu", hirakata:"hokusetsu",
+    kishiwada:"senshu", sakai:"senshu"
+  };
+  function regionOf(v){ return WARD_REGION[v.wardKey] || "central"; }
+
+  var venues = JSON.parse(document.getElementById('venuesData').textContent);
+
+  var COURSES = JSON.parse(document.getElementById('coursesData').textContent);
+
+  function loadLang(){
+    try{ return localStorage.getItem(LANG_KEY) || "ja"; }catch(e){ return "ja"; }
+  }
+  function saveLang(){
+    try{ localStorage.setItem(LANG_KEY, state.lang); }catch(e){}
+  }
+
+  var state = { search:"", wards:new Set(), ages:new Set(), budgets:new Set(), cats:new Set(), misc:new Set(), recOnly:false, favOnly:false, sort:"rec", lang:loadLang(), courseFilter:null, view:"list", openRegions:new Set() };
+
+  function loadFavorites(){
+    try{
+      var raw = JSON.parse(localStorage.getItem(FAV_KEY) || "[]");
+      return new Set(raw.map(Number));
+    }catch(e){ return new Set(); }
+  }
+  function saveFavorites(){
+    try{ localStorage.setItem(FAV_KEY, JSON.stringify(Array.from(favorites))); }catch(e){}
+  }
+  var favorites = loadFavorites();
+
+  // ---- read filter state from the URL so a shared link reproduces the same view ----
+  function parseStateFromUrl(){
+    var p = new URLSearchParams(location.search);
+    if(p.has('q')) state.search = p.get('q');
+    if(p.has('ward')) p.get('ward').split(',').filter(Boolean).forEach(function(k){ if(WARD[k]) state.wards.add(k); });
+    if(p.has('age')) p.get('age').split(',').filter(Boolean).forEach(function(k){ if(AGE[k]) state.ages.add(k); });
+    if(p.has('budget')) p.get('budget').split(',').filter(Boolean).forEach(function(k){ if(BUDGET[k]) state.budgets.add(k); });
+    if(p.has('cat')) p.get('cat').split(',').filter(Boolean).forEach(function(k){ if(CAT[k]) state.cats.add(k); });
+    if(p.has('misc')) p.get('misc').split(',').filter(Boolean).forEach(function(k){ if(MISC[k]) state.misc.add(k); });
+    if(p.get('rec')==='1') state.recOnly = true;
+    if(p.get('fav')==='1') state.favOnly = true;
+    if(p.has('sort')) state.sort = p.get('sort');
+    if(p.get('lang')==='en' || p.get('lang')==='ja') state.lang = p.get('lang');
+    if(p.has('course') && COURSES.some(function(c){ return c.id === p.get('course'); })) state.courseFilter = p.get('course');
+    if(p.get('view') === 'area') state.view = 'area';
+  }
+  parseStateFromUrl();
+
+  // ---- write current filter state back into the URL (no reload) so it can be copied/shared ----
+  function updateUrl(){
+    var p = new URLSearchParams();
+    if(state.search) p.set('q', state.search);
+    if(state.wards.size) p.set('ward', Array.from(state.wards).join(','));
+    if(state.ages.size) p.set('age', Array.from(state.ages).join(','));
+    if(state.budgets.size) p.set('budget', Array.from(state.budgets).join(','));
+    if(state.cats.size) p.set('cat', Array.from(state.cats).join(','));
+    if(state.misc.size) p.set('misc', Array.from(state.misc).join(','));
+    if(state.recOnly) p.set('rec','1');
+    if(state.favOnly) p.set('fav','1');
+    if(state.sort !== 'rec') p.set('sort', state.sort);
+    if(state.lang !== 'ja') p.set('lang', state.lang);
+    if(state.courseFilter) p.set('course', state.courseFilter);
+    if(state.view !== 'list') p.set('view', state.view);
+    var qs = p.toString();
+    history.replaceState(null, '', qs ? ('?'+qs) : location.pathname);
+  }
+
+  // ---- get a venue field in the current language, falling back to Japanese ----
+  function tv(v, key){
+    if(state.lang === 'en'){
+      var k = key + 'En';
+      return (v[k] !== undefined && v[k] !== '') ? v[k] : v[key];
+    }
+    return v[key];
+  }
+
+  function starIcon(filled){
+    return '<svg viewBox="0 0 24 24" fill="'+(filled?'currentColor':'none')+'" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 15 9 22 9.5 16.5 14.5 18.5 22 12 17.8 5.5 22 7.5 14.5 2 9.5 9 9"/></svg>';
+  }
+
+  // ---- illustration builder: abstract skyline + category glyph, no photos, all inline SVG ----
+  function artSVG(v){
+    var c = CAT[v.cat].color;
+    var seed = v.id * 37;
+    function h(n){ return (seed*n) % 60; }
+    var glyphs = {
+      park: '<circle cx="180" cy="58" r="30" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="3"/><line x1="180" y1="28" x2="180" y2="88" stroke="rgba(255,255,255,.55)" stroke-width="2"/><line x1="150" y1="58" x2="210" y2="58" stroke="rgba(255,255,255,.55)" stroke-width="2"/><line x1="159" y1="37" x2="201" y2="79" stroke="rgba(255,255,255,.4)" stroke-width="2"/><line x1="159" y1="79" x2="201" y2="37" stroke="rgba(255,255,255,.4)" stroke-width="2"/>',
+      aqua: '<path d="M150 70 Q175 40 210 62 Q195 65 195 72 Q195 79 210 82 Q175 104 150 74 Z" fill="rgba(255,255,255,.85)"/><circle cx="163" cy="66" r="2.4" fill="'+c+'"/>',
+      view: '<rect x="168" y="18" width="10" height="80" fill="rgba(255,255,255,.85)"/><rect x="150" y="90" width="46" height="8" fill="rgba(255,255,255,.6)"/><circle cx="173" cy="30" r="4" fill="rgba(255,255,255,.9)"/>',
+      castle: '<rect x="150" y="55" width="60" height="40" fill="rgba(255,255,255,.85)"/><polygon points="150,55 180,28 210,55" fill="rgba(255,255,255,.85)"/><rect x="150" y="45" width="8" height="10" fill="rgba(255,255,255,.85)"/><rect x="166" y="45" width="8" height="10" fill="rgba(255,255,255,.85)"/><rect x="182" y="45" width="8" height="10" fill="rgba(255,255,255,.85)"/><rect x="198" y="45" width="8" height="10" fill="rgba(255,255,255,.85)"/>',
+      shop: '<path d="M158 55 h44 l6 40 a4 4 0 0 1 -4 4 h-48 a4 4 0 0 1 -4 -4 z" fill="rgba(255,255,255,.85)"/><path d="M168 55 v-8 a12 12 0 0 1 24 0 v8" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="3"/>',
+      onsen: '<path d="M150 70 q8 -12 16 0 q8 -12 16 0 q8 -12 16 0 q8 -12 16 0" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="3" stroke-linecap="round"/><path d="M150 84 q8 -12 16 0 q8 -12 16 0 q8 -12 16 0 q8 -12 16 0" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round"/>',
+      museum: '<rect x="152" y="55" width="56" height="38" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="3"/><polygon points="148,55 180,34 212,55" fill="rgba(255,255,255,.85)"/><line x1="152" y1="70" x2="208" y2="70" stroke="rgba(255,255,255,.5)" stroke-width="2"/>',
+      arcade: '<rect x="150" y="55" width="60" height="34" rx="10" fill="rgba(255,255,255,.85)"/><circle cx="168" cy="72" r="4.5" fill="'+c+'"/><circle cx="192" cy="65" r="3.5" fill="'+c+'"/><circle cx="200" cy="75" r="3.5" fill="'+c+'"/>',
+      nature: '<circle cx="168" cy="55" r="16" fill="rgba(255,255,255,.85)"/><circle cx="188" cy="48" r="12" fill="rgba(255,255,255,.65)"/><circle cx="196" cy="62" r="13" fill="rgba(255,255,255,.75)"/><rect x="180" y="70" width="6" height="20" fill="rgba(255,255,255,.55)"/>'
+    };
+    var bars = [];
+    var bw = 14, x = 8;
+    for(var i=0;i<9;i++){
+      var bh = 20 + h(i+3);
+      bars.push('<rect x="'+x+'" y="'+(120-bh)+'" width="'+bw+'" height="'+bh+'" fill="rgba(255,255,255,.18)"/>');
+      x += bw + 4;
+    }
+    return '<svg viewBox="0 0 320 120" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">' +
+      '<defs><linearGradient id="g'+v.id+'" x1="0" y1="0" x2="1" y2="1">' +
+      '<stop offset="0" stop-color="'+c+'" stop-opacity="0.95"/>' +
+      '<stop offset="1" stop-color="'+c+'" stop-opacity="0.55"/>' +
+      '</linearGradient></defs>' +
+      '<rect width="320" height="120" fill="url(#g'+v.id+')"/>' +
+      bars.join('') +
+      glyphs[v.cat] +
+      '</svg>';
+  }
+
+  function tierMark(tier){
+    var full = "¥¥¥".slice(0,tier);
+    var off = "¥¥¥".slice(tier);
+    return '<span class="price-tier">'+full+'<span style="opacity:.35">'+off+'</span></span>';
+  }
+
+  function directionsUrl(v){
+    return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(v.name + ' 大阪 ' + v.area);
+  }
+
+  function extLinkIcon(){
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+  }
+  function pinIcon(){
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+  }
+  function heartIcon(filled){
+    return '<svg viewBox="0 0 24 24" fill="'+(filled?'currentColor':'none')+'" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>';
+  }
+  function calendarIcon(){
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg>';
+  }
+
+  // ---- normalize katakana→hiragana and full-width→half-width so search shrugs off common typing variants ----
+  function normalizeSearch(s){
+    return String(s).toLowerCase()
+      .replace(/[ァ-ヶ]/g, function(ch){ return String.fromCharCode(ch.charCodeAt(0) - 0x60); })
+      .replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(ch){ return String.fromCharCode(ch.charCodeAt(0) - 0xfee0); });
+  }
+
+  function chip(container, key, pairSource, activeSet){
+    var b = document.createElement('button');
+    b.className = 'chip' + (activeSet.has(key) ? ' active' : '');
+    b.type = 'button';
+    b.textContent = L(pairSource);
+    b.dataset.key = key;
+    b.addEventListener('click', function(){
+      if(activeSet.has(key)) activeSet.delete(key); else activeSet.add(key);
+      b.classList.toggle('active');
+      updateUrl();
+      updateFilterBadge();
+      render();
+    });
+    container.appendChild(b);
+  }
+
+  // ---- ward chips are ordered by how many venues they contain, so the busiest areas surface first ----
+  var wardKeysByCount = Object.keys(WARD).filter(function(k){ return k !== 'various'; }).sort(function(a,b){
+    var ca = venues.filter(function(v){ return v.wardKey===a; }).length;
+    var cb = venues.filter(function(v){ return v.wardKey===b; }).length;
+    return cb - ca;
+  });
+  wardKeysByCount.push('various');
+  wardKeysByCount.forEach(function(k){ chip(document.getElementById('wardChips'), k, WARD[k], state.wards); });
+  Object.keys(AGE).forEach(function(k){ chip(document.getElementById('ageChips'), k, AGE[k], state.ages); });
+  Object.keys(BUDGET).forEach(function(k){ chip(document.getElementById('budgetChips'), k, BUDGET[k], state.budgets); });
+  Object.keys(CAT).forEach(function(k){ chip(document.getElementById('catChips'), k, CAT[k].label, state.cats); });
+  Object.keys(MISC).forEach(function(k){ chip(document.getElementById('miscChips'), k, MISC[k], state.misc); });
+
+  function refreshChipLabels(){
+    document.querySelectorAll('#wardChips .chip').forEach(function(b){ b.textContent = L(WARD[b.dataset.key]); });
+    document.querySelectorAll('#ageChips .chip').forEach(function(b){ b.textContent = L(AGE[b.dataset.key]); });
+    document.querySelectorAll('#budgetChips .chip').forEach(function(b){ b.textContent = L(BUDGET[b.dataset.key]); });
+    document.querySelectorAll('#catChips .chip').forEach(function(b){ b.textContent = L(CAT[b.dataset.key].label); });
+    document.querySelectorAll('#miscChips .chip').forEach(function(b){ b.textContent = L(MISC[b.dataset.key]); });
+  }
+
+  var searchInput = document.getElementById('searchInput');
+  searchInput.value = state.search;
+  searchInput.addEventListener('input', function(e){
+    state.search = e.target.value.trim();
+    updateUrl();
+    render();
+  });
+  var sortSelect = document.getElementById('sortSelect');
+  sortSelect.value = state.sort;
+  sortSelect.addEventListener('change', function(e){
+    state.sort = e.target.value;
+    updateUrl();
+    render();
+  });
+  var recBtn = document.getElementById('recToggle');
+  recBtn.classList.toggle('active', state.recOnly);
+  recBtn.addEventListener('click', function(){
+    state.recOnly = !state.recOnly;
+    recBtn.classList.toggle('active', state.recOnly);
+    updateUrl();
+    render();
+  });
+  var favBtn = document.getElementById('favToggle');
+  favBtn.classList.toggle('active', state.favOnly);
+  favBtn.addEventListener('click', function(){
+    state.favOnly = !state.favOnly;
+    favBtn.classList.toggle('active', state.favOnly);
+    updateUrl();
+    render();
+  });
+  var viewListBtn = document.getElementById('viewListBtn');
+  var viewAreaBtn = document.getElementById('viewAreaBtn');
+  function setView(v){
+    state.view = v;
+    viewListBtn.classList.toggle('active', v === 'list');
+    viewAreaBtn.classList.toggle('active', v === 'area');
+    updateUrl();
+    render();
+  }
+  viewListBtn.addEventListener('click', function(){ setView('list'); });
+  viewAreaBtn.addEventListener('click', function(){ setView('area'); });
+  if(state.view === 'area'){ viewListBtn.classList.remove('active'); viewAreaBtn.classList.add('active'); }
+
+  document.getElementById('clearBtn').addEventListener('click', function(){
+    state.search=""; state.wards.clear(); state.ages.clear(); state.budgets.clear(); state.cats.clear(); state.misc.clear();
+    state.recOnly=false; state.favOnly=false; state.sort="rec";
+    searchInput.value = "";
+    sortSelect.value = "rec";
+    recBtn.classList.remove('active');
+    favBtn.classList.remove('active');
+    document.querySelectorAll('.chip.active').forEach(function(c){ c.classList.remove('active'); });
+    updateUrl();
+    updateFilterBadge();
+    render();
+  });
+
+  // ---- the chip panel is not sticky, so opening it never eats into card space while scrolling ----
+  var filterPanel = document.getElementById('filterPanel');
+  var filterToggleBtn = document.getElementById('filterToggle');
+  var filterBadge = document.getElementById('filterBadge');
+  function setFilterOpen(open){
+    filterPanel.classList.toggle('open', open);
+    filterToggleBtn.classList.toggle('open', open);
+    filterToggleBtn.setAttribute('aria-expanded', String(open));
+  }
+  filterToggleBtn.addEventListener('click', function(){
+    setFilterOpen(!filterPanel.classList.contains('open'));
+  });
+  function updateFilterBadge(){
+    var n = state.wards.size + state.ages.size + state.budgets.size + state.cats.size + state.misc.size;
+    filterBadge.textContent = n;
+    filterBadge.classList.toggle('show', n > 0);
+    filterToggleBtn.classList.toggle('has-active', n > 0);
+  }
+  var copyBtn = document.getElementById('copyBtn');
+  copyBtn.addEventListener('click', function(){
+    updateUrl();
+    var url = location.href;
+    var done = function(){
+      var original = copyBtn.textContent;
+      copyBtn.textContent = UI[state.lang].copyDone;
+      setTimeout(function(){ copyBtn.textContent = original; }, 1800);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(done).catch(function(){ fallbackCopy(url, done); });
+    } else {
+      fallbackCopy(url, done);
+    }
+  });
+  function fallbackCopy(text, done){
+    try{
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      done();
+    }catch(e){}
+  }
+
+  var langBtn = document.getElementById('langToggle');
+  langBtn.addEventListener('click', function(){
+    state.lang = state.lang === 'ja' ? 'en' : 'ja';
+    saveLang();
+    updateUrl();
+    applyStaticText();
+    refreshChipLabels();
+    renderCourses();
+    renderExploreTiles();
+    renderFooterLinks();
+    render();
+  });
+
+  // ---- event delegation: heart buttons are re-created on every render() ----
+  document.getElementById('grid').addEventListener('click', function(e){
+    var favBtnEl = e.target.closest('.fav-btn');
+    if(favBtnEl){
+      var id = Number(favBtnEl.dataset.id);
+      if(favorites.has(id)) favorites.delete(id); else favorites.add(id);
+      saveFavorites();
+      render();
+      return;
+    }
+    // ---- accordion header: toggle without a full re-render, so the height transition actually animates ----
+    var head = e.target.closest('.area-section-head');
+    if(head){
+      var section = head.closest('.area-section');
+      var key = section.dataset.region;
+      var nowOpen = !section.classList.contains('open');
+      section.classList.toggle('open', nowOpen);
+      head.setAttribute('aria-expanded', String(nowOpen));
+      if(nowOpen) state.openRegions.add(key); else state.openRegions.delete(key);
+    }
+  });
+
+  // ---- opening a course: shows every venue in that course, in route order ----
+  function activateCourse(courseId){
+    if(!COURSES.some(function(c){ return c.id === courseId; })) return;
+    state.courseFilter = courseId;
+    state.search = ""; searchInput.value = "";
+    state.ages.clear(); state.budgets.clear(); state.cats.clear(); state.misc.clear();
+    state.recOnly = false; state.favOnly = false;
+    recBtn.classList.remove('active'); favBtn.classList.remove('active');
+    document.querySelectorAll('.chip.active').forEach(function(el){ el.classList.remove('active'); });
+    updateFilterBadge();
+    updateUrl();
+    render();
+    document.getElementById('grid').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  function clearCourseFilter(){
+    state.courseFilter = null;
+    updateUrl();
+    render();
+  }
+  document.getElementById('courseBannerClear').addEventListener('click', clearCourseFilter);
+
+  // ---- a pill jumps to one venue; the "see the whole course" button (or a mouse click anywhere
+  //      else on the card) opens every stop. Only real <button> elements are focusable here, so
+  //      keyboard/screen-reader users get standard, unambiguous Tab + Enter behavior for free ----
+  document.getElementById('coursesGrid').addEventListener('click', function(e){
+    var pill = e.target.closest('.course-venue-pill');
+    if(pill){
+      var v = venues.find(function(x){ return x.id === Number(pill.dataset.id); });
+      if(!v) return;
+      state.courseFilter = null;
+      state.search = tv(v, 'name');
+      searchInput.value = state.search;
+      updateUrl();
+      render();
+      var card = document.getElementById('card-' + v.id);
+      if(card){
+        card.classList.add('highlight');
+        card.scrollIntoView({behavior:'smooth', block:'center'});
+        setTimeout(function(){ card.classList.remove('highlight'); }, 2200);
+      }
+      return;
+    }
+    var courseCard = e.target.closest('.course-card');
+    if(courseCard) activateCourse(courseCard.dataset.course);
+  });
+
+  function matches(v){
+    if(state.search){
+      var q = normalizeSearch(state.search);
+      if(q && !v._searchHay){
+        v._searchHay = normalizeSearch([v.name, v.nameEn, v.area, v.areaEn, v.desc, v.descEn].concat(v.aliases || []).join(' '));
+      }
+      if(q && v._searchHay.indexOf(q) === -1) return false;
+    }
+    if(state.recOnly && !v.rec) return false;
+    if(state.favOnly && !favorites.has(v.id)) return false;
+    if(state.wards.size){
+      if(!state.wards.has(v.wardKey)) return false;
+    }
+    if(state.ages.size){
+      var okAge = v.age.some(function(a){ return state.ages.has(a); });
+      if(!okAge) return false;
+    }
+    if(state.budgets.size){
+      if(!state.budgets.has(String(v.budget))) return false;
+    }
+    if(state.cats.size){
+      if(!state.cats.has(v.cat)) return false;
+    }
+    if(state.misc.has('rain') && !v.rainOk) return false;
+    return true;
+  }
+
+  function sortFn(a,b){
+    if(state.sort==="rating") return b.rating - a.rating;
+    if(state.sort==="budgetAsc") return a.budget - b.budget || b.rating - a.rating;
+    if(state.sort==="name") return tv(a,'name').localeCompare(tv(b,'name'), state.lang==='en' ? 'en' : 'ja');
+    // rec order (default)
+    if(a.rec !== b.rec) return a.rec ? -1 : 1;
+    return b.rating - a.rating;
+  }
+
+  function cardHTML(v, orderNum){
+    var cat = CAT[v.cat];
+    var t = UI[state.lang];
+    var ageLabels = v.age.map(function(a){ return L(AGE[a]); });
+    var isFav = favorites.has(v.id);
+    var extraTags = [t.durationPrefix + tv(v,'duration')];
+    if(v.rainOk) extraTags.push(L(MISC.rain));
+    var ribbon = orderNum
+      ? '<span class="ribbon route">' + orderNum + '</span>'
+      : (v.rec ? '<span class="ribbon">' + starIcon(true) + t.recBadge + '</span>' : '');
+    return '' +
+    '<article class="card" id="card-' + v.id + '">' +
+      '<div class="card-art">' + artSVG(v) +
+        ribbon +
+        '<button class="fav-btn' + (isFav ? ' active' : '') + '" type="button" data-id="' + v.id + '" aria-pressed="' + isFav + '" aria-label="' + t.favAria + '">' + heartIcon(isFav) + '</button>' +
+        '<span class="area-tag">' + tv(v,'area') + '</span>' +
+      '</div>' +
+      '<div class="card-body">' +
+        '<div class="card-title-row">' +
+          '<h3 class="card-title">' + tv(v,'name') + '</h3>' +
+        '</div>' +
+        '<span class="cat-label" style="color:' + cat.textColor + '">' + L(cat.label) + '</span>' +
+        '<p class="desc">' + tv(v,'desc') + '</p>' +
+        '<div class="access-row">' + pinIcon() + tv(v,'station') + (tv(v,'walk') && tv(v,'walk') !== '-' ? ' ・ ' + tv(v,'walk') : '') + '</div>' +
+        '<div class="access-row">' + calendarIcon() + t.closedLabel + tv(v,'closedDay') + '</div>' +
+        '<div class="tag-row">' +
+          ageLabels.map(function(a){return '<span class="tag">'+a+'</span>';}).join('') +
+          extraTags.map(function(tg){return '<span class="tag">'+tg+'</span>';}).join('') +
+        '</div>' +
+        '<div class="price-row">' +
+          '<div class="price-block">' +
+            '<span class="price-main">' + tierMark(v.budget) + tv(v,'price') + '</span>' +
+            (tv(v,'priceNote') ? '<span class="price-note">' + tv(v,'priceNote') + '</span>' : '') +
+          '</div>' +
+          '<span class="rating">' + starIcon(true) + '<b>' + v.rating.toFixed(1) + '</b></span>' +
+        '</div>' +
+        '<div class="link-row">' +
+          '<a class="link-btn" href="' + v.official + '" target="_blank" rel="noopener noreferrer">' + extLinkIcon() + t.official + '</a>' +
+          '<a class="link-btn" href="' + directionsUrl(v) + '" target="_blank" rel="noopener noreferrer">' + pinIcon() + t.route + '</a>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function render(){
+    var t = UI[state.lang];
+    var grid = document.getElementById('grid');
+    var banner = document.getElementById('courseBanner');
+    var course = state.courseFilter ? COURSES.find(function(c){ return c.id === state.courseFilter; }) : null;
+    var list;
+
+    if(course){
+      banner.hidden = false;
+      document.getElementById('courseBannerText').innerHTML =
+        t.courseBannerPrefix + '<b>' + L(course.title) + '</b>' + t.courseBannerSuffix.replace('{n}', course.venueIds.length);
+      document.getElementById('courseBannerClear').textContent = t.courseBannerClear;
+      list = course.venueIds.map(function(id){ return venues.find(function(v){ return v.id === id; }); }).filter(Boolean);
+    } else {
+      banner.hidden = true;
+      list = venues.filter(matches).sort(sortFn);
+    }
+
+    document.getElementById('resultCount').textContent = list.length;
+    document.getElementById('statFav').textContent = favorites.size;
+
+    if(!list.length){
+      var msg = state.favOnly && !favorites.size ? t.emptyFav : t.emptyGeneral;
+      grid.innerHTML = '<div class="empty">' + msg + '</div>';
+      return;
+    }
+
+    if(course){
+      grid.innerHTML = '<div class="grid">' + list.map(function(v, i){ return cardHTML(v, i+1); }).join('') + '</div>';
+      return;
+    }
+
+    if(state.view === 'area'){
+      // ---- group the current result set by broad region, as a collapsible accordion so the
+      //      page opens as a scannable table of contents (region + count) rather than a wall
+      //      of 70 cards; each region expands independently and stays open across re-renders ----
+      var groups = {};
+      list.forEach(function(v){
+        var r = regionOf(v);
+        (groups[r] = groups[r] || []).push(v);
+      });
+      grid.innerHTML = REGIONS.filter(function(r){ return groups[r.key] && groups[r.key].length; }).map(function(r){
+        var items = groups[r.key];
+        var countLabel = items.length + (state.lang === 'en' ? ' venues' : '件');
+        var isOpen = state.openRegions.has(r.key);
+        return '<div class="area-section' + (isOpen ? ' open' : '') + '" data-region="' + r.key + '">' +
+          '<button class="area-section-head" type="button" aria-expanded="' + isOpen + '">' +
+            '<h3>' + L(r.label) + '</h3>' +
+            '<span class="area-section-count">' + countLabel + '</span>' +
+            '<svg class="area-section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>' +
+          '</button>' +
+          '<div class="area-section-body"><div class="area-section-body-inner"><div class="grid">' +
+            items.map(function(v){ return cardHTML(v); }).join('') +
+          '</div></div></div>' +
+        '</div>';
+      }).join('');
+    } else {
+      grid.innerHTML = '<div class="grid">' + list.map(function(v){ return cardHTML(v); }).join('') + '</div>';
+    }
+  }
+
+  function courseCardHTML(c){
+    var courseVenues = c.venueIds.map(function(id){ return venues.find(function(x){ return x.id === id; }); }).filter(Boolean);
+    var pills = courseVenues.map(function(v, i){
+      return '<button class="course-venue-pill" type="button" data-id="' + v.id + '"><span class="num">' + (i+1) + '</span>' + tv(v,'name') + '</button>';
+    }).join('');
+    // ---- surface a family-friendly signal when every stop on the course suits kids, so a parent doesn't have to open each one to check ----
+    var isFamilyFriendly = courseVenues.length > 0 && courseVenues.every(function(v){ return v.age.indexOf('kids') !== -1 || v.age.indexOf('family') !== -1; });
+    var t = UI[state.lang];
+    return '' +
+    '<div class="course-card" data-course="' + c.id + '">' +
+      '<div class="course-top-row">' +
+        '<span class="course-area-tag">' + L(c.area) + '</span>' +
+        '<span class="course-meta">' + L(c.meta) + '</span>' +
+      '</div>' +
+      '<h3 class="course-title">' + L(c.title) + '</h3>' +
+      '<p class="course-summary">' + L(c.summary) + '</p>' +
+      (isFamilyFriendly ? '<span class="course-family-tag">' + t.familyFriendly + '</span>' : '') +
+      '<div class="course-venues">' + pills + '</div>' +
+      '<button class="course-open-btn" type="button" data-course="' + c.id + '">' + t.courseOpenAll + '</button>' +
+    '</div>';
+  }
+  function renderCourses(){
+    document.getElementById('coursesGrid').innerHTML = COURSES.map(courseCardHTML).join('');
+    document.getElementById('coursesCount').textContent = COURSES.length;
+    updateCoursesScrollState();
+  }
+
+  // ---- arrow buttons + fade mask make the course carousel's scrollability obvious to mouse/keyboard users ----
+  var coursesScrollEl = document.getElementById('coursesGrid');
+  var coursesPrevBtn = document.getElementById('coursesPrev');
+  var coursesNextBtn = document.getElementById('coursesNext');
+  function updateCoursesScrollState(){
+    var atStart = coursesScrollEl.scrollLeft <= 4;
+    var atEnd = coursesScrollEl.scrollLeft >= coursesScrollEl.scrollWidth - coursesScrollEl.clientWidth - 4;
+    coursesPrevBtn.disabled = atStart;
+    coursesNextBtn.disabled = atEnd;
+    coursesScrollEl.classList.toggle('at-end', atEnd);
+  }
+  coursesScrollEl.addEventListener('scroll', updateCoursesScrollState);
+  window.addEventListener('resize', updateCoursesScrollState);
+  coursesPrevBtn.addEventListener('click', function(){
+    coursesScrollEl.scrollBy({left: -280, behavior: 'smooth'});
+  });
+  coursesNextBtn.addEventListener('click', function(){
+    coursesScrollEl.scrollBy({left: 280, behavior: 'smooth'});
+  });
+
+  // ---- hero "browse by theme" tiles: one per category, jumps straight to a filtered grid ----
+  function renderExploreTiles(){
+    document.getElementById('exploreTiles').innerHTML = Object.keys(CAT).map(function(key){
+      return '<button class="explore-tile" type="button" data-cat="' + key + '" style="--tile-color:' + CAT[key].color + '">' +
+        '<span class="dot"></span>' + L(CAT[key].label) +
+      '</button>';
+    }).join('');
+  }
+  document.getElementById('exploreTiles').addEventListener('click', function(e){
+    var tile = e.target.closest('.explore-tile');
+    if(!tile) return;
+    filterByCategory(tile.dataset.cat);
+  });
+
+  function filterByCategory(key){
+    state.courseFilter = null;
+    state.cats.clear();
+    state.cats.add(key);
+    document.querySelectorAll('#catChips .chip').forEach(function(c){ c.classList.toggle('active', c.dataset.key === key); });
+    updateFilterBadge();
+    setFilterOpen(true);
+    updateUrl();
+    render();
+    document.getElementById('grid').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function filterByRegion(regionKey){
+    var wardsInRegion = Object.keys(WARD_REGION).filter(function(w){ return WARD_REGION[w] === regionKey; });
+    state.courseFilter = null;
+    state.wards.clear();
+    wardsInRegion.forEach(function(w){ state.wards.add(w); });
+    document.querySelectorAll('#wardChips .chip').forEach(function(c){ c.classList.toggle('active', state.wards.has(c.dataset.key)); });
+    updateFilterBadge();
+    setFilterOpen(true);
+    updateUrl();
+    render();
+    document.getElementById('grid').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  // ---- footer quick links mirror the hero tiles, so the footer doubles as a lightweight sitemap ----
+  function renderFooterLinks(){
+    document.getElementById('footerRegions').innerHTML = REGIONS.map(function(r){
+      return '<li><button type="button" data-region="' + r.key + '">' + L(r.label) + '</button></li>';
+    }).join('');
+    document.getElementById('footerCats').innerHTML = Object.keys(CAT).map(function(key){
+      return '<li><button type="button" data-cat="' + key + '">' + L(CAT[key].label) + '</button></li>';
+    }).join('');
+  }
+  document.getElementById('footerRegions').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-region]');
+    if(b) filterByRegion(b.dataset.region);
+  });
+  document.getElementById('footerCats').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-cat]');
+    if(b) filterByCategory(b.dataset.cat);
+  });
+
+  function applyStaticText(){
+    var t = UI[state.lang];
+    document.getElementById('txtEyebrow').textContent = t.eyebrow;
+    document.getElementById('txtTitle').textContent = t.title;
+    document.getElementById('txtLead').textContent = t.lead;
+    document.getElementById('txtStatTotal').textContent = t.statTotal;
+    document.getElementById('txtStatCat').textContent = t.statCat;
+    document.getElementById('txtStatRec').textContent = t.statRec;
+    document.getElementById('txtStatFav').textContent = t.statFav;
+    document.getElementById('txtExploreLabel').textContent = t.exploreLabel;
+    document.getElementById('txtCoursesHeading').textContent = t.coursesHeading;
+    document.getElementById('txtCoursesSub').textContent = t.coursesSub;
+    document.getElementById('txtCoursesCount').textContent = t.coursesCountLabel;
+    document.getElementById('txtGridEyebrow').textContent = t.gridEyebrow;
+    document.getElementById('txtGridHeading').textContent = t.gridHeading;
+    searchInput.placeholder = t.searchPlaceholder;
+    searchInput.setAttribute('aria-label', t.searchPlaceholder);
+    document.getElementById('txtRecToggle').textContent = t.recToggle;
+    document.getElementById('txtFavToggle').textContent = t.favToggle;
+    document.getElementById('txtFilterToggle').textContent = t.filterToggle;
+    document.getElementById('txtViewList').textContent = t.viewList;
+    document.getElementById('txtViewArea').textContent = t.viewArea;
+    document.getElementById('optRec').textContent = t.optRec;
+    document.getElementById('optRating').textContent = t.optRating;
+    document.getElementById('optBudget').textContent = t.optBudget;
+    document.getElementById('optName').textContent = t.optName;
+    document.getElementById('txtLabelWard').textContent = t.labelWard;
+    document.getElementById('txtLabelAge').textContent = t.labelAge;
+    document.getElementById('txtLabelBudget').textContent = t.labelBudget;
+    document.getElementById('txtLabelCat').textContent = t.labelCat;
+    document.getElementById('txtLabelMisc').textContent = t.labelMisc;
+    document.getElementById('txtResultSuffix').textContent = t.resultSuffix;
+    document.getElementById('copyBtn').textContent = t.copyLink;
+    document.getElementById('clearBtn').textContent = t.reset;
+    document.getElementById('footerText').textContent = t.footer;
+    document.getElementById('txtFooterTagline').textContent = t.footerTagline;
+    document.getElementById('txtFooterAreaHeading').textContent = t.footerAreaHeading;
+    document.getElementById('txtFooterCatHeading').textContent = t.footerCatHeading;
+    document.getElementById('txtFooterAboutHeading').textContent = t.footerAboutHeading;
+    document.getElementById('txtFooterDisclaimer').textContent = t.footerDisclaimer;
+    langBtn.textContent = t.langBtn;
+  }
+
+  // ---- best-effort PWA setup: works once this page is hosted on a real domain;
+  //      inside the Artifact preview, "Add to Home Screen" support depends on the host ----
+  function setupPWA(){
+    function meta(name, content){
+      var m = document.createElement('meta');
+      m.name = name; m.content = content;
+      document.head.appendChild(m);
+    }
+    meta('theme-color', '#ff8a3d');
+    meta('apple-mobile-web-app-capable', 'yes');
+    meta('mobile-web-app-capable', 'yes');
+    meta('apple-mobile-web-app-status-bar-style', 'black-translucent');
+    meta('apple-mobile-web-app-title', '大阪娯楽ガイド');
+
+    var iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+      '<rect width="512" height="512" rx="96" fill="#161b2c"/>' +
+      '<defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">' +
+      '<stop offset="0" stop-color="#ff8a3d"/><stop offset="1" stop-color="#ef4a5a"/></linearGradient></defs>' +
+      '<rect x="40" y="40" width="432" height="432" rx="72" fill="url(#ig)"/>' +
+      '<polygon points="256,120 344,214 316,214 316,296 196,296 196,214 168,214" fill="#fff"/>' +
+      '<rect x="150" y="296" width="212" height="26" rx="4" fill="#fff"/>' +
+      '</svg>';
+    var iconUrl = 'data:image/svg+xml,' + encodeURIComponent(iconSvg);
+
+    var appleIcon = document.createElement('link');
+    appleIcon.rel = 'apple-touch-icon';
+    appleIcon.href = iconUrl;
+    document.head.appendChild(appleIcon);
+
+    try{
+      var manifest = {
+        name: '大阪娯楽ガイド / Osaka Entertainment Guide',
+        short_name: '大阪ガイド',
+        start_url: location.pathname + location.search,
+        display: 'standalone',
+        background_color: '#0e1220',
+        theme_color: '#ff8a3d',
+        icons: [{ src: iconUrl, sizes: '512x512', type: 'image/svg+xml', purpose: 'any' }]
+      };
+      var blob = new Blob([JSON.stringify(manifest)], {type:'application/manifest+json'});
+      var link = document.createElement('link');
+      link.rel = 'manifest';
+      link.href = URL.createObjectURL(blob);
+      document.head.appendChild(link);
+    }catch(e){}
+  }
+
+  applyStaticText();
+  document.getElementById('statTotal').textContent = venues.length;
+  document.getElementById('statRec').textContent = venues.filter(function(v){return v.rec;}).length;
+  updateFilterBadge();
+  // ---- if a shared link arrived with chip filters already set, open the panel so they're visible ----
+  if(state.wards.size || state.ages.size || state.budgets.size || state.cats.size || state.misc.size){ setFilterOpen(true); }
+  renderCourses();
+  renderExploreTiles();
+  renderFooterLinks();
+  render();
+  setupPWA();
+})();
+</script>
+
+</body>
+</html>
