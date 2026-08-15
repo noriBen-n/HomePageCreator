@@ -221,12 +221,13 @@
     letter-spacing:.05em;
   }
 
-  .explore-block{margin-top:36px;}
+  .explore-block{max-width:1180px;margin:0 auto;padding-bottom:28px;}
   .explore-label{
     font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
     font-size:13px;
     color:var(--text-dim);
     margin:0 0 12px;
+    padding:0 24px;
     display:flex;
     align-items:center;
     gap:8px;
@@ -240,7 +241,7 @@
     display:flex;
     gap:10px;
     overflow-x:auto;
-    padding-bottom:4px;
+    padding:0 24px 4px;
     scrollbar-width:thin;
   }
   .explore-tile{
@@ -270,6 +271,34 @@
 
   .wave-divider{max-width:1180px;margin:0 auto;padding:0 24px;line-height:0;}
   .wave-divider svg{width:100%;height:20px;display:block;}
+
+  /* ---------- "Browse themes & courses" wrapper: one collapsible unit so mobile
+     can skip straight to the venue list, while desktop keeps it open by default ---------- */
+  .discover-summary{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    max-width:1180px;
+    margin:0 auto;
+    padding:14px 24px;
+    cursor:pointer;
+    list-style:none;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+    font-size:13px;
+    color:var(--text-dim);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .discover-summary::-webkit-details-marker{display:none;}
+  .discover-summary:hover{color:var(--text);}
+  .discover-chevron{width:15px;height:15px;flex:none;transition:transform .15s ease;}
+  .discover-details[open] .discover-chevron{transform:rotate(180deg);}
+  .discover-details[open] .discover-summary{border-bottom:1px solid transparent;}
+  .discover-body{padding-top:28px;}
+  @media (prefers-reduced-motion: reduce){
+    .discover-chevron{transition:none;}
+  }
 
   /* ---------- Model courses ---------- */
   .courses-wrap{
@@ -583,6 +612,19 @@
     margin:0 auto;
     padding:16px 24px 18px;
   }
+  /* holds recToggle/favToggle/sortSelect when JS relocates them here on mobile;
+     :empty means it renders as nothing at all on desktop, where they stay in the search row */
+  .filter-panel-mobile-controls:empty{display:none;}
+  .filter-panel-mobile-controls{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:18px;
+    padding-bottom:18px;
+    border-bottom:1px solid var(--line);
+  }
+  .filter-panel-mobile-controls .rec-toggle{justify-content:center;}
+  .filter-panel-mobile-controls .sort{width:100%;}
 
   .view-toggle{
     display:flex;
@@ -1044,8 +1086,14 @@
     .hero p.lead{font-size:14px;margin-bottom:18px;}
     .stats{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px;}
     .stat b{font-size:22px;}
-    .explore-block{margin-top:20px;}
-    .explore-label{font-size:12px;margin-bottom:8px;}
+
+    /* -- browse themes & courses: collapsed by default (see the JS init check), smaller summary -- */
+    .discover-summary{padding:12px 16px;font-size:12px;}
+    .discover-body{padding-top:18px;}
+    .explore-block{padding-bottom:20px;}
+    .explore-label{font-size:12px;margin-bottom:8px;padding:0 16px;}
+    .explore-scroll{padding:0 16px 4px;}
+    .wave-divider{padding:0 16px;}
 
     /* -- model courses: heading and count stack instead of squeezing onto one line -- */
     .courses-wrap{padding-bottom:24px;}
@@ -1163,38 +1211,47 @@
       <div class="stat"><b id="statRec">9</b><span id="txtStatRec">編集部おすすめ</span></div>
       <div class="stat"><b id="statFav">0</b><span id="txtStatFav">お気に入り登録中</span></div>
     </div>
+  </div>
+</div>
+
+<details class="discover-details" id="discoverDetails" open>
+  <summary class="discover-summary">
+    <span id="txtDiscoverSummary">テーマ・コースから探す</span>
+    <svg class="discover-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="discover-body">
     <div class="explore-block">
       <p class="explore-label" id="txtExploreLabel">テーマから探す</p>
       <div class="explore-scroll" id="exploreTiles"></div>
     </div>
-  </div>
-</div>
 
-<div class="wave-divider" aria-hidden="true">
-  <svg viewBox="0 0 1180 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0 12 Q 30 0 60 12 T 120 12 T 180 12 T 240 12 T 300 12 T 360 12 T 420 12 T 480 12 T 540 12 T 600 12 T 660 12 T 720 12 T 780 12 T 840 12 T 900 12 T 960 12 T 1020 12 T 1080 12 T 1140 12 T 1200 12"
-      fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.35"/>
-  </svg>
-</div>
-
-<div class="courses-wrap">
-  <div class="courses-head">
-    <div>
-      <h2 class="courses-heading" id="txtCoursesHeading">モデルコース</h2>
-      <p class="courses-sub" id="txtCoursesSub">エリアが近い施設を組み合わせた定番プラン。施設名をタップすると下の一覧に絞り込みます。</p>
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1180 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 12 Q 30 0 60 12 T 120 12 T 180 12 T 240 12 T 300 12 T 360 12 T 420 12 T 480 12 T 540 12 T 600 12 T 660 12 T 720 12 T 780 12 T 840 12 T 900 12 T 960 12 T 1020 12 T 1080 12 T 1140 12 T 1200 12"
+          fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.35"/>
+      </svg>
     </div>
-    <span class="courses-count"><b id="coursesCount">9</b><span id="txtCoursesCount"> コース・横にスワイプ →</span></span>
+
+    <div class="courses-wrap">
+      <div class="courses-head">
+        <div>
+          <h2 class="courses-heading" id="txtCoursesHeading">モデルコース</h2>
+          <p class="courses-sub" id="txtCoursesSub">エリアが近い施設を組み合わせた定番プラン。施設名をタップすると下の一覧に絞り込みます。</p>
+        </div>
+        <span class="courses-count"><b id="coursesCount">9</b><span id="txtCoursesCount"> コース・横にスワイプ →</span></span>
+      </div>
+      <div class="courses-scroll-wrap">
+        <button class="scroll-arrow prev" id="coursesPrev" type="button" aria-label="前へ" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="courses-scroll" id="coursesGrid"></div>
+        <button class="scroll-arrow next" id="coursesNext" type="button" aria-label="次へ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
   </div>
-  <div class="courses-scroll-wrap">
-    <button class="scroll-arrow prev" id="coursesPrev" type="button" aria-label="前へ" disabled>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <div class="courses-scroll" id="coursesGrid"></div>
-    <button class="scroll-arrow next" id="coursesNext" type="button" aria-label="次へ">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-</div>
+</details>
 
 <div class="filterbar">
   <div class="filterbar-inner">
@@ -1222,6 +1279,7 @@
 
 <div class="filter-panel" id="filterPanel">
   <div class="filter-panel-inner">
+    <div class="filter-panel-mobile-controls" id="filterPanelMobileControls"></div>
     <div class="filter-groups">
       <div class="fgroup">
         <span class="flabel" id="txtLabelWard">市区町村</span>
@@ -1315,6 +1373,7 @@
       lead:"USJ から道頓堀の夜景、下町の温泉まで。年齢層・予算・おすすめ度で絞り込んで、今日行く場所を見つける。",
       statTotal:"掲載施設", statCat:"カテゴリ", statRec:"編集部おすすめ", statFav:"お気に入り登録中",
       exploreLabel:"テーマから探す",
+      discoverSummary:"テーマ・コースから探す",
       coursesHeading:"モデルコース",
       coursesSub:"エリアが近い施設を組み合わせた定番プラン。施設名をタップすると下の一覧に絞り込みます。",
       coursesCountLabel:" コース・横にスワイプ →",
@@ -1350,6 +1409,7 @@
       lead:"From USJ to the Dotonbori night skyline to a neighborhood hot spring — filter by age group, budget, and editor's picks to find where to go today.",
       statTotal:"Venues listed", statCat:"Categories", statRec:"Editor's picks", statFav:"Saved favorites",
       exploreLabel:"Browse by theme",
+      discoverSummary:"Browse themes & courses",
       coursesHeading:"Suggested Courses",
       coursesSub:"Nearby venues paired into ready-made plans. Tap a venue name to filter the list below.",
       coursesCountLabel:" courses · swipe for more →",
@@ -2147,6 +2207,7 @@
     document.getElementById('txtStatRec').textContent = t.statRec;
     document.getElementById('txtStatFav').textContent = t.statFav;
     document.getElementById('txtExploreLabel').textContent = t.exploreLabel;
+    document.getElementById('txtDiscoverSummary').textContent = t.discoverSummary;
     document.getElementById('txtCoursesHeading').textContent = t.coursesHeading;
     document.getElementById('txtCoursesSub').textContent = t.coursesSub;
     document.getElementById('txtCoursesCount').textContent = t.coursesCountLabel;
@@ -2240,6 +2301,32 @@
   renderFooterLinks();
   render();
   setupPWA();
+
+  // ---- mobile only: collapse "browse themes & courses" so the venue list is reachable
+  //      without first scrolling past two horizontally-scrolling discovery sections ----
+  var mobileQuery = window.matchMedia('(max-width: 640px)');
+  if(mobileQuery.matches){ document.getElementById('discoverDetails').removeAttribute('open'); }
+
+  // ---- mobile only: move おすすめ/お気に入り/並び替え out of the sticky search row and into the
+  //      filter panel, so the sticky bar stays down to just the search box + a single filter button.
+  //      These are the real DOM nodes being relocated (not clones), so every listener already
+  //      attached to them keeps working — nothing to re-wire on either side of the move. ----
+  function applyResponsiveControls(){
+    var recToggleEl = document.getElementById('recToggle');
+    var favToggleEl = document.getElementById('favToggle');
+    var sortSelectEl = document.getElementById('sortSelect');
+    var filterToggleEl = document.getElementById('filterToggle');
+    var searchRowEl = document.querySelector('.search-row');
+    var mobileAnchor = document.getElementById('filterPanelMobileControls');
+    var elements = [recToggleEl, favToggleEl, sortSelectEl];
+    if(mobileQuery.matches){
+      elements.forEach(function(el){ mobileAnchor.appendChild(el); });
+    } else {
+      elements.forEach(function(el){ searchRowEl.insertBefore(el, filterToggleEl); });
+    }
+  }
+  applyResponsiveControls();
+  if(mobileQuery.addEventListener) mobileQuery.addEventListener('change', applyResponsiveControls);
 })();
 </script>
 
