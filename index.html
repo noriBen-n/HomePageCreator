@@ -208,15 +208,6 @@
     gap:28px;
     flex-wrap:wrap;
   }
-  @media (max-width:520px){
-    .hero{padding:32px 20px 24px;}
-    .stats{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:18px 16px;
-    }
-    .explore-block{margin-top:22px;}
-  }
   .stat b{
     font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
     font-size:26px;
@@ -1039,6 +1030,59 @@
   .credits-list b{color:var(--text-dim);font-weight:600;}
   .credits-list a{color:var(--accent2-text);text-decoration:none;}
   .credits-list a:hover{text-decoration:underline;}
+
+  /* ================================================================
+     Mobile (≤640px): every section below gets tighter spacing, smaller
+     type, and a rearranged layout, rather than just wrapping whatever
+     the desktop flex/grid happens to produce.
+     ================================================================ */
+  @media (max-width:640px){
+    /* -- hero: smaller padding, smaller title, 2x2 stat grid -- */
+    .hero{padding:28px 16px 20px;}
+    .eyebrow{font-size:11px;letter-spacing:.2em;margin-bottom:10px;}
+    h1.title{font-size:28px;margin-bottom:10px;}
+    .hero p.lead{font-size:14px;margin-bottom:18px;}
+    .stats{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px;}
+    .stat b{font-size:22px;}
+    .explore-block{margin-top:20px;}
+    .explore-label{font-size:12px;margin-bottom:8px;}
+
+    /* -- model courses: heading and count stack instead of squeezing onto one line -- */
+    .courses-wrap{padding-bottom:24px;}
+    .courses-head{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:4px;
+      padding:0 16px;
+      margin-bottom:12px;
+    }
+    .courses-heading{font-size:17px;}
+    .course-card{flex-basis:238px;padding:14px 15px;}
+    .courses-scroll{padding:2px 16px 12px;}
+
+    /* -- filter bar: search box gets its own row, controls wrap below it as a compact row -- */
+    .filterbar-inner{padding:10px 16px;gap:8px;}
+    .search-row{gap:8px;}
+    .search-box{flex-basis:100%;padding:8px 12px;}
+    .rec-toggle, .filter-toggle, .sort{padding:7px 11px;font-size:12px;}
+    .filter-panel-inner{padding:14px 16px 16px;}
+    .filter-groups{gap:14px 20px;}
+
+    /* -- results row: count/view-toggle above, actions below, instead of a tight single line -- */
+    .wrap{padding:16px 16px 60px;}
+    .result-row{flex-direction:column;align-items:flex-start;gap:8px;}
+
+    /* -- card grid: single column, tighter gaps and padding -- */
+    .grid{gap:14px;}
+    .card-body{padding:14px 14px 16px;gap:8px;}
+    .card-title{font-size:16px;}
+    .link-row{flex-direction:column;}
+
+    /* -- footer: one column instead of a cramped 2-up grid -- */
+    .footer-inner{padding:32px 16px 20px;}
+    .footer-grid{grid-template-columns:1fr;gap:22px;}
+    .credits-list{grid-template-columns:1fr;}
+  }
 </style>
 </head>
 <body>
