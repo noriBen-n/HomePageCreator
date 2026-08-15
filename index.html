@@ -779,8 +779,10 @@
   .card-art{
     height:150px;
     position:relative;
+    background:var(--surface2);
   }
   .card-art svg{width:100%;height:100%;display:block;}
+  .card-art img{width:100%;height:100%;display:block;object-fit:cover;}
   .ribbon{
     position:absolute;
     top:10px;left:10px;
@@ -1358,6 +1360,17 @@
 
   var COURSES = JSON.parse(document.getElementById('coursesData').textContent);
 
+  // ---- real photos, added one venue at a time -------------------------------------------
+  // Key = venue id (see the "id" field in venuesData above), value = path to the image file.
+  // 1. Put your own photo (or a properly licensed one) in the images/ folder, e.g. images/kaiyukan.jpg
+  // 2. Add a line below: 3: "images/kaiyukan.jpg",
+  // A venue left out of this list keeps showing its illustration — nothing else to change.
+  // Landscape photos around 800x450px work best; keep files under ~300KB so pages load fast.
+  var PHOTOS = {
+    // 3: "images/kaiyukan.jpg",
+    // 6: "images/harukas300.jpg",
+  };
+
   function loadLang(){
     try{ return localStorage.getItem(LANG_KEY) || "ja"; }catch(e){ return "ja"; }
   }
@@ -1759,9 +1772,13 @@
     var ribbon = orderNum
       ? '<span class="ribbon route">' + orderNum + '</span>'
       : (v.rec ? '<span class="ribbon">' + starIcon(true) + t.recBadge + '</span>' : '');
+    var photo = PHOTOS[v.id];
+    var artContent = photo
+      ? '<img src="' + photo + '" alt="' + tv(v,'name') + '" loading="lazy">'
+      : artSVG(v);
     return '' +
     '<article class="card" id="card-' + v.id + '">' +
-      '<div class="card-art">' + artSVG(v) +
+      '<div class="card-art">' + artContent +
         ribbon +
         '<button class="fav-btn' + (isFav ? ' active' : '') + '" type="button" data-id="' + v.id + '" aria-pressed="' + isFav + '" aria-label="' + t.favAria + '">' + heartIcon(isFav) + '</button>' +
         '<span class="area-tag">' + tv(v,'area') + '</span>' +
