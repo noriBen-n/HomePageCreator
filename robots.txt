@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://noriben-n.github.io/HomePageCreator/sitemap.xml
