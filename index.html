@@ -998,6 +998,12 @@
     font-size:11px;
     color:var(--text-dim);
   }
+  .footer-credits{
+    margin:8px 0 0;
+    font-size:10.5px;
+    color:var(--text-dim);
+    line-height:1.7;
+  }
 </style>
 </head>
 <body>
@@ -1207,6 +1213,9 @@
     </div>
     <div class="footer-bottom">
       <span id="txtFooterDisclaimer">大阪の観光公式機関とは無関係の、個人制作による非公式ファンガイドです。</span>
+      <p class="footer-credits" id="txtPhotoCredits">
+        写真クレジット: 大阪城（Onyo, CC BY-SA 4.0）／梅田スカイビル（Kakidai, CC BY-SA 4.0）／通天閣（Fabio Achilli, CC BY 2.0）／住吉大社（Hyppolyte de Saint-Rambert, CC BY 4.0）／仁徳天皇陵古墳（国土地理院 カラー空中写真）。各写真はWikimedia Commonsより、クリエイティブ・コモンズ・ライセンスのもとで使用しています。
+      </p>
     </div>
   </div>
 </footer>
@@ -1251,6 +1260,7 @@
       footerTagline:"年齢層・予算・エリアで探す、非公式の大阪おでかけガイド。",
       footerAreaHeading:"エリアから探す", footerCatHeading:"カテゴリから探す", footerAboutHeading:"このサイトについて",
       footerDisclaimer:"大阪の観光公式機関とは無関係の、個人制作による非公式ファンガイドです。",
+      photoCredits:"写真クレジット: 大阪城（Onyo, CC BY-SA 4.0）／梅田スカイビル（Kakidai, CC BY-SA 4.0）／通天閣（Fabio Achilli, CC BY 2.0）／住吉大社（Hyppolyte de Saint-Rambert, CC BY 4.0）／仁徳天皇陵古墳（国土地理院 カラー空中写真）。各写真はWikimedia Commonsより、クリエイティブ・コモンズ・ライセンスのもとで使用しています。",
       langBtn:"EN"
     },
     en:{
@@ -1284,6 +1294,7 @@
       footerTagline:"An unofficial Osaka outing guide — browse by age group, budget, and area.",
       footerAreaHeading:"Browse by area", footerCatHeading:"Browse by category", footerAboutHeading:"About this site",
       footerDisclaimer:"An independent, unofficial fan guide, not affiliated with any official Osaka tourism body.",
+      photoCredits:"Photo credits: Osaka Castle (Onyo, CC BY-SA 4.0) · Umeda Sky Building (Kakidai, CC BY-SA 4.0) · Tsutenkaku (Fabio Achilli, CC BY 2.0) · Sumiyoshi Taisha (Hyppolyte de Saint-Rambert, CC BY 4.0) · Nintoku-tenno-ryo Kofun (Geospatial Information Authority of Japan, color aerial photograph). All via Wikimedia Commons under their respective Creative Commons licenses.",
       langBtn:"日本語"
     }
   };
@@ -1367,6 +1378,11 @@
   // A venue left out of this list keeps showing its illustration — nothing else to change.
   // Landscape photos around 800x450px work best; keep files under ~300KB so pages load fast.
   var PHOTOS = {
+    2: "images/osaka-castle.jpg",
+    4: "images/umeda-sky-building.jpg",
+    17: "images/tsutenkaku.jpg",
+    54: "images/sumiyoshi-taisha.jpg",
+    65: "images/nintoku-kofun.jpg",
     // 3: "images/kaiyukan.jpg",
     // 6: "images/harukas300.jpg",
   };
@@ -2015,6 +2031,7 @@
     document.getElementById('txtFooterCatHeading').textContent = t.footerCatHeading;
     document.getElementById('txtFooterAboutHeading').textContent = t.footerAboutHeading;
     document.getElementById('txtFooterDisclaimer').textContent = t.footerDisclaimer;
+    document.getElementById('txtPhotoCredits').textContent = t.photoCredits;
     langBtn.textContent = t.langBtn;
   }
 

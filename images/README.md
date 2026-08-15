@@ -24,3 +24,17 @@ var PHOTOS = {
 - JPG形式を推奨
 
 `PHOTOS` に追加していない施設は、これまで通りイラストのまま表示されます。
+
+## 現在使用している写真（5件）
+
+Wikimedia Commonsで公開されている、クリエイティブ・コモンズ・ライセンス（CC BY / CC BY-SA）の写真を使用しています。
+
+| 施設 | ファイル | 撮影者 | ライセンス |
+|---|---|---|---|
+| 大阪城（id:2） | osaka-castle.jpg | Onyo | CC BY-SA 4.0 |
+| 梅田スカイビル（id:4） | umeda-sky-building.jpg | Kakidai | CC BY-SA 4.0 |
+| 通天閣（id:17） | tsutenkaku.jpg | Fabio Achilli | CC BY 2.0 |
+| 住吉大社（id:54） | sumiyoshi-taisha.jpg | Hyppolyte de Saint-Rambert | CC BY 4.0 |
+| 仁徳天皇陵古墳（id:65） | nintoku-kofun.jpg | 国土地理院 | カラー空中写真（要出典表記） |
+
+これらのライセンスは**クレジット表記が必須**なので、`index.html` フッターの「写真クレジット」欄に記載しています。他にWikimedia Commonsなどからライセンス写真を追加する場合は、同様にここへクレジットを追記してください（自分で撮影した写真であれば、クレジット表記は不要です）。
