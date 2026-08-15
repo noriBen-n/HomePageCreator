@@ -998,12 +998,38 @@
     font-size:11px;
     color:var(--text-dim);
   }
-  .footer-credits{
-    margin:8px 0 0;
+  .credits-details{margin-top:10px;}
+  .credits-details summary{
+    font-size:11px;
+    color:var(--text-dim);
+    cursor:pointer;
+    user-select:none;
+    list-style:none;
+  }
+  .credits-details summary::-webkit-details-marker{display:none;}
+  .credits-details summary::before{
+    content:"▸ ";
+    display:inline-block;
+    transition:transform .15s ease;
+  }
+  .credits-details[open] summary::before{transform:rotate(90deg);}
+  .credits-details summary:hover{color:var(--text);}
+  .credits-list{
+    list-style:none;
+    margin:10px 0 0;
+    padding:0;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:6px 20px;
+  }
+  .credits-list li{
     font-size:10.5px;
     color:var(--text-dim);
-    line-height:1.7;
+    line-height:1.6;
   }
+  .credits-list b{color:var(--text-dim);font-weight:600;}
+  .credits-list a{color:var(--accent2-text);text-decoration:none;}
+  .credits-list a:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -1213,9 +1239,10 @@
     </div>
     <div class="footer-bottom">
       <span id="txtFooterDisclaimer">大阪の観光公式機関とは無関係の、個人制作による非公式ファンガイドです。</span>
-      <p class="footer-credits" id="txtPhotoCredits">
-        写真クレジット: 大阪城（Onyo, CC BY-SA 4.0）／梅田スカイビル（Kakidai, CC BY-SA 4.0）／通天閣（Fabio Achilli, CC BY 2.0）／住吉大社（Hyppolyte de Saint-Rambert, CC BY 4.0）／仁徳天皇陵古墳（国土地理院 カラー空中写真）。各写真はWikimedia Commonsより、クリエイティブ・コモンズ・ライセンスのもとで使用しています。
-      </p>
+      <details class="credits-details">
+        <summary id="txtCreditsSummary">写真クレジット（13件）</summary>
+        <ul class="credits-list" id="photoCreditsList"></ul>
+      </details>
     </div>
   </div>
 </footer>
@@ -1260,7 +1287,8 @@
       footerTagline:"年齢層・予算・エリアで探す、非公式の大阪おでかけガイド。",
       footerAreaHeading:"エリアから探す", footerCatHeading:"カテゴリから探す", footerAboutHeading:"このサイトについて",
       footerDisclaimer:"大阪の観光公式機関とは無関係の、個人制作による非公式ファンガイドです。",
-      photoCredits:"写真クレジット: 大阪城（Onyo, CC BY-SA 4.0）／梅田スカイビル（Kakidai, CC BY-SA 4.0）／あべのハルカス（Oilstreet, CC BY-SA 3.0）／天保山大観覧車（663highland, CC BY-SA 3.0）／通天閣（Fabio Achilli, CC BY 2.0）／中之島公園バラ園（Laitche, CC BY-SA 4.0）／大阪天満宮（663highland, CC BY-SA 3.0）／難波八阪神社（Immanuelle, CC BY 4.0）／四天王寺（そらみみ, CC BY-SA 3.0）／住吉大社（Hyppolyte de Saint-Rambert, CC BY 4.0）／岸和田城（663highland, CC BY-SA 3.0）／箕面大滝（663highland, CC BY-SA 3.0）／仁徳天皇陵古墳（国土地理院 カラー空中写真）。各写真はWikimedia Commonsより、クリエイティブ・コモンズ・ライセンスのもとで使用しています。",
+      creditsSummaryPrefix:"写真クレジット（", creditsSummarySuffix:"件）",
+      creditsSource:"出典", creditsLicense:"ライセンス",
       langBtn:"EN"
     },
     en:{
@@ -1294,7 +1322,8 @@
       footerTagline:"An unofficial Osaka outing guide — browse by age group, budget, and area.",
       footerAreaHeading:"Browse by area", footerCatHeading:"Browse by category", footerAboutHeading:"About this site",
       footerDisclaimer:"An independent, unofficial fan guide, not affiliated with any official Osaka tourism body.",
-      photoCredits:"Photo credits: Osaka Castle (Onyo, CC BY-SA 4.0) · Umeda Sky Building (Kakidai, CC BY-SA 4.0) · Abeno Harukas (Oilstreet, CC BY-SA 3.0) · Tempozan Ferris Wheel (663highland, CC BY-SA 3.0) · Tsutenkaku (Fabio Achilli, CC BY 2.0) · Nakanoshima Park Rose Garden (Laitche, CC BY-SA 4.0) · Osaka Temmangu (663highland, CC BY-SA 3.0) · Namba Yasaka Shrine (Immanuelle, CC BY 4.0) · Shitennoji (Soramimi, CC BY-SA 3.0) · Sumiyoshi Taisha (Hyppolyte de Saint-Rambert, CC BY 4.0) · Kishiwada Castle (663highland, CC BY-SA 3.0) · Minoo Falls (663highland, CC BY-SA 3.0) · Nintoku-tenno-ryo Kofun (Geospatial Information Authority of Japan, color aerial photograph). All via Wikimedia Commons under their respective Creative Commons licenses.",
+      creditsSummaryPrefix:"Photo credits (", creditsSummarySuffix:")",
+      creditsSource:"Source", creditsLicense:"License",
       langBtn:"日本語"
     }
   };
@@ -1393,6 +1422,50 @@
     65: "images/nintoku-kofun.jpg",
     // 3: "images/kaiyukan.jpg",
   };
+
+  // ---- one entry per photo in PHOTOS above: author + license + a link back to the source,
+  //      so attribution follows the standard "Title / Author / Source / License" (TASL) form ----
+  var PHOTO_CREDITS = [
+    {id:2,  name:{ja:"大阪城", en:"Osaka Castle"}, author:"Onyo", license:"CC BY-SA 4.0",
+      licenseUrl:"https://creativecommons.org/licenses/by-sa/4.0/",
+      sourceUrl:"https://commons.wikimedia.org/wiki/File:Osaka_Castle_2.jpg"},
+    {id:4,  name:{ja:"梅田スカイビル", en:"Umeda Sky Building"}, author:"Kakidai", license:"CC BY-SA 4.0",
+      licenseUrl:"https://creativecommons.org/licenses/by-sa/4.0/",
+      sourceUrl:"https://commons.wikimedia.org/wiki/File:2018_Umeda_Sky_Building.jpg"},
+    {id:6,  name:{ja:"あべのハルカス", en:"Abeno Harukas"}, author:"Oilstreet", license:"CC BY-SA 3.0",
+      licenseUrl:"https://creativecommons.org/licenses/by-sa/3.0/",
+      sourceUrl:"https://commons.wikimedia.org/wiki/File:Abeno_Harukas_Osaka_Japan01-r.jpg"},
+    {id:12, name:{ja:"天保山大観覧車", en:"Tempozan Ferris Wheel"}, author:"663highland", license:"CC BY-SA 3.0",
+      licenseUrl:"https://creativecommons.org/licenses/by-sa/3.0/",
+      sourceUrl:"https://commons.wikimedia.org/wiki/File:Tempozan_giant_wheel02s2048.jpg"},
+    {id:17, name:{ja:"通天閣", en:"Tsutenkaku"}, author:"Fabio Achilli", license:"CC BY 2.0",
+      licenseUrl:"https://creativecommons.org/licenses/by/2.0/",
+      sourceUrl:"https://commons.wikimedia.org/wiki/File:Tsutenkaku_Tower,_Shinsekai_(44147478362).jpg"},
+    {id:40, name:{ja:"中之島公園 バラ園", en:"Nakanoshima Park Rose Garden"}, author:"Laitche", license:"CC BY-SA 4.0",
+      licenseUrl:"https://creativecommons.org/licenses/by-sa/4.0/",
+      sourceUrl:"https://commons.wikimedia.org/wiki/File:Pink_roses,_Nakanoshima_Park,_Osaka.jpg"},
+    {id:42, name:{ja:"大阪天満宮", en:"Osaka Temmangu"}, author:"663highland", license:"CC BY-SA 3.0",
+      licenseUrl:"https://creativecommons.org/licenses/by-sa/3.0/",
+      sourceUrl:"https://commons.wikimedia.org/wiki/File:Osaka_Tenmangu01n3390.jpg"},
+    {id:47, name:{ja:"難波八阪神社", en:"Namba Yasaka Shrine"}, author:"Immanuelle", license:"CC BY 4.0",
+      licenseUrl:"https://creativecommons.org/licenses/by/4.0/",
+      sourceUrl:"https://commons.wikimedia.org/wiki/File:Namba-Yasaka-Shrine-lions_head_theater.jpg"},
+    {id:51, name:{ja:"四天王寺", en:"Shitennoji"}, author:"そらみみ (Soramimi)", license:"CC BY-SA 3.0",
+      licenseUrl:"https://creativecommons.org/licenses/by-sa/3.0/",
+      sourceUrl:"https://commons.wikimedia.org/wiki/File:Kondo_and_Gojunoto_Tower_of_Shitennoji_Temple.JPG"},
+    {id:54, name:{ja:"住吉大社", en:"Sumiyoshi Taisha"}, author:"Hyppolyte de Saint-Rambert", license:"CC BY 4.0",
+      licenseUrl:"https://creativecommons.org/licenses/by/4.0/",
+      sourceUrl:"https://commons.wikimedia.org/wiki/File:Sumiyoshi-taisha_(Osaka_Sumiyoshi-ku)_Shrine_hdsr_S5_g17.jpg"},
+    {id:59, name:{ja:"岸和田城", en:"Kishiwada Castle"}, author:"663highland", license:"CC BY-SA 3.0",
+      licenseUrl:"https://creativecommons.org/licenses/by-sa/3.0/",
+      sourceUrl:"https://commons.wikimedia.org/wiki/File:Kishiwada_Castle_Kishiwada_Osaka_pref_Japan04s3.jpg"},
+    {id:62, name:{ja:"箕面公園・箕面大滝", en:"Minoo Falls"}, author:"663highland", license:"CC BY-SA 3.0",
+      licenseUrl:"https://creativecommons.org/licenses/by-sa/3.0/",
+      sourceUrl:"https://commons.wikimedia.org/wiki/File:Minoh_Falls_Minoh_Osaka_pref_Japan01s5.jpg"},
+    {id:65, name:{ja:"仁徳天皇陵古墳", en:"Nintoku-tenno-ryo Kofun"}, author:{ja:"国土地理院", en:"Geospatial Information Authority of Japan"}, license:{ja:"カラー空中写真", en:"Color aerial photograph"},
+      licenseUrl:"https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html",
+      sourceUrl:"https://commons.wikimedia.org/wiki/File:NintokuTomb_Aerial_photograph_2007.jpg"}
+  ];
 
   function loadLang(){
     try{ return localStorage.getItem(LANG_KEY) || "ja"; }catch(e){ return "ja"; }
@@ -1981,6 +2054,19 @@
   }
 
   // ---- footer quick links mirror the hero tiles, so the footer doubles as a lightweight sitemap ----
+  // ---- a credit field is either a plain string (most photographers) or a {ja,en} pair
+  //      (a couple of entries, like the government source, needed a translated label) ----
+  function LA(x){ return (typeof x === 'string') ? x : L(x); }
+
+  function renderPhotoCredits(){
+    var t = UI[state.lang];
+    document.getElementById('photoCreditsList').innerHTML = PHOTO_CREDITS.map(function(c){
+      return '<li><b>' + L(c.name) + '</b> — ' +
+        '<a href="' + c.sourceUrl + '" target="_blank" rel="noopener noreferrer">' + LA(c.author) + ' (' + t.creditsSource + ')</a> · ' +
+        '<a href="' + c.licenseUrl + '" target="_blank" rel="noopener noreferrer">' + LA(c.license) + '</a></li>';
+    }).join('');
+  }
+
   function renderFooterLinks(){
     document.getElementById('footerRegions').innerHTML = REGIONS.map(function(r){
       return '<li><button type="button" data-region="' + r.key + '">' + L(r.label) + '</button></li>';
@@ -2038,7 +2124,8 @@
     document.getElementById('txtFooterCatHeading').textContent = t.footerCatHeading;
     document.getElementById('txtFooterAboutHeading').textContent = t.footerAboutHeading;
     document.getElementById('txtFooterDisclaimer').textContent = t.footerDisclaimer;
-    document.getElementById('txtPhotoCredits').textContent = t.photoCredits;
+    document.getElementById('txtCreditsSummary').textContent = t.creditsSummaryPrefix + PHOTO_CREDITS.length + t.creditsSummarySuffix;
+    renderPhotoCredits();
     langBtn.textContent = t.langBtn;
   }
 
