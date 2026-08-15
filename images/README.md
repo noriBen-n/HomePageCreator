@@ -25,7 +25,7 @@ var PHOTOS = {
 
 `PHOTOS` に追加していない施設は、これまで通りイラストのまま表示されます。
 
-## 現在使用している写真（5件）
+## 現在使用している写真（13件）
 
 Wikimedia Commonsで公開されている、クリエイティブ・コモンズ・ライセンス（CC BY / CC BY-SA）の写真を使用しています。
 
@@ -33,8 +33,16 @@ Wikimedia Commonsで公開されている、クリエイティブ・コモンズ
 |---|---|---|---|
 | 大阪城（id:2） | osaka-castle.jpg | Onyo | CC BY-SA 4.0 |
 | 梅田スカイビル（id:4） | umeda-sky-building.jpg | Kakidai | CC BY-SA 4.0 |
+| あべのハルカス（id:6） | abeno-harukas.jpg | Oilstreet | CC BY-SA 3.0 |
+| 天保山大観覧車（id:12） | tempozan-ferris-wheel.jpg | 663highland | CC BY-SA 3.0 |
 | 通天閣（id:17） | tsutenkaku.jpg | Fabio Achilli | CC BY 2.0 |
+| 中之島公園バラ園（id:40） | nakanoshima-rose-garden.jpg | Laitche | CC BY-SA 4.0 |
+| 大阪天満宮（id:42） | osaka-tenmangu.jpg | 663highland | CC BY-SA 3.0 |
+| 難波八阪神社（id:47） | namba-yasaka-shrine.jpg | Immanuelle | CC BY 4.0 |
+| 四天王寺（id:51） | shitennoji.jpg | そらみみ | CC BY-SA 3.0 |
 | 住吉大社（id:54） | sumiyoshi-taisha.jpg | Hyppolyte de Saint-Rambert | CC BY 4.0 |
+| 岸和田城（id:59） | kishiwada-castle.jpg | 663highland | CC BY-SA 3.0 |
+| 箕面公園・箕面大滝（id:62） | minoo-falls.jpg | 663highland | CC BY-SA 3.0 |
 | 仁徳天皇陵古墳（id:65） | nintoku-kofun.jpg | 国土地理院 | カラー空中写真（要出典表記） |
 
 これらのライセンスは**クレジット表記が必須**なので、`index.html` フッターの「写真クレジット」欄に記載しています。他にWikimedia Commonsなどからライセンス写真を追加する場合は、同様にここへクレジットを追記してください（自分で撮影した写真であれば、クレジット表記は不要です）。
