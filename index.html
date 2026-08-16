@@ -533,9 +533,20 @@
     border:1px solid var(--line);
     color:var(--text);
     border-radius:10px;
-    padding:9px 12px;
+    padding:9px 30px 9px 12px;
     font-size:13px;
     font-family:inherit;
+    box-sizing:border-box;
+    max-width:100%;
+    /* native select arrows render inconsistently (and can push the box past its own width
+       on some mobile browsers), so we neutralize the OS arrow and draw our own instead */
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235b6178' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 10px center;
+    background-size:14px;
   }
 
   .rec-toggle{
@@ -1081,6 +1092,10 @@
   @media (max-width:640px){
     /* -- hero: smaller padding, smaller title, 2x2 stat grid -- */
     .hero{padding:28px 16px 20px;}
+    /* the language toggle sits below the title on its own row (instead of beside it), so its
+       position stays fixed regardless of whether the English or Japanese title is longer */
+    .hero-top{flex-direction:column;align-items:flex-start;gap:12px;}
+    .lang-toggle{order:2;}
     .eyebrow{font-size:11px;letter-spacing:.2em;margin-bottom:10px;}
     h1.title{font-size:28px;margin-bottom:10px;}
     .hero p.lead{font-size:14px;margin-bottom:18px;}
@@ -1817,7 +1832,14 @@
     filterToggleBtn.setAttribute('aria-expanded', String(open));
   }
   filterToggleBtn.addEventListener('click', function(){
-    setFilterOpen(!filterPanel.classList.contains('open'));
+    var opening = !filterPanel.classList.contains('open');
+    setFilterOpen(opening);
+    // ---- the panel sits in normal flow right below the sticky bar; if the page is scrolled
+    //      past that point, it would expand off-screen above the current view with nothing
+    //      visibly changing, so bring the sticky bar (and the panel opening under it) into view ----
+    if(opening){
+      document.querySelector('.filterbar').scrollIntoView({behavior:'smooth', block:'start'});
+    }
   });
   function updateFilterBadge(){
     var n = state.wards.size + state.ages.size + state.budgets.size + state.cats.size + state.misc.size;
