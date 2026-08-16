@@ -25,9 +25,9 @@ var PHOTOS = {
 
 `PHOTOS` に追加していない施設は、これまで通りイラストのまま表示されます。
 
-## 現在使用している写真（39件）
+## 現在使用している写真（49件）
 
-Wikimedia Commonsで公開されている、クリエイティブ・コモンズ・ライセンス（CC BY / CC BY-SA）の写真を使用しています。詳しいクレジット一覧はサイトのフッター（「写真クレジット」欄）を参照してください。id:2〜66の主要な観光施設・公園・商店街・博物館などをカバーしています。
+Wikimedia Commonsで公開されている、クリエイティブ・コモンズ・ライセンス（CC BY / CC BY-SA / CC0）の写真を使用しています。詳しいクレジット一覧はサイトのフッター（「写真クレジット」欄）を参照してください。id:2〜69の主要な観光施設・公園・商店街・博物館などをカバーしています。
 
 | 施設 | ファイル | 撮影者 | ライセンス |
 |---|---|---|---|
@@ -60,5 +60,15 @@ Wikimedia Commonsで公開されている、クリエイティブ・コモンズ
 | 浜寺公園（id:64） | hamadera-park.jpg | Midori | CC BY-SA 3.0 |
 | 仁徳天皇陵古墳（id:65） | nintoku-kofun.jpg | 国土地理院 | カラー空中写真（要出典表記） |
 | 大仙公園（id:66） | daisen-park.jpg | Laitche | CC BY-SA 4.0 |
+| ニフレル（id:13） | nifrel.jpg | もんじゃ (Monja) | CC BY-SA 4.0 |
+| 大阪くらしの今昔館（id:14） | kurashi-konjyakukan.jpg | Garam | CC BY 1.0 |
+| グランフロント大阪（id:25） | grand-front-osaka.jpg | Mc681 | CC BY-SA 4.0 |
+| なんばパークス（id:27） | namba-parks.jpg | 663highland | CC BY-SA 3.0 |
+| アサヒビール吹田工場（id:33） | asahi-suita.jpg | Kirakirameister | CC BY-SA 3.0 |
+| 大阪中之島美術館（id:38） | nakanoshima-art-museum.jpg | Прикли | CC BY 4.0 |
+| 天神橋筋商店街（id:43） | tenjinbashi-suji.jpg | Mc681 | CC BY-SA 4.0 |
+| 舞洲工場（id:57） | maishima-plant.jpg | ignis | CC BY-SA 3.0 |
+| 堺・緑のミュージアム ハーベストの丘（id:68） | harvest-hill.jpg | 聖石大戦ぶぅぶぅ | CC BY-SA 4.0 |
+| 堺市役所21階展望ロビー（id:69） | sakai-city-hall.jpg | Sakai Yayoi | CC0 1.0 |
 
 これらのライセンスは**クレジット表記が必須**なので、`index.html` フッターの「写真クレジット」欄に記載しています。他にWikimedia Commonsなどからライセンス写真を追加する場合は、同様にここへクレジットを追記してください（自分で撮影した写真であれば、クレジット表記は不要です）。
