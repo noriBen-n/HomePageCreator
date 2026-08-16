@@ -1836,9 +1836,14 @@
     setFilterOpen(opening);
     // ---- the panel sits in normal flow right below the sticky bar; if the page is scrolled
     //      past that point, it would expand off-screen above the current view with nothing
-    //      visibly changing, so bring the sticky bar (and the panel opening under it) into view ----
+    //      visibly changing. scrollIntoView() on the bar itself is no help here: once the bar
+    //      is actually stuck at top:0, getBoundingClientRect() already reports top≈0, so the
+    //      browser thinks it's already in view and scrolls nowhere. offsetTop instead reads the
+    //      bar's original position in the document flow — unaffected by the sticky offset —
+    //      so scrolling there reliably brings the panel that opens beneath it into view too. ----
     if(opening){
-      document.querySelector('.filterbar').scrollIntoView({behavior:'smooth', block:'start'});
+      var bar = document.querySelector('.filterbar');
+      window.scrollTo({top: bar.offsetTop, behavior:'smooth'});
     }
   });
   function updateFilterBadge(){
